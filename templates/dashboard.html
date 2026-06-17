@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | SkripsiEngineer{% endblock %}
+
+{% set STATUS_LABEL = {
+  'Pending': 'Menunggu Review',
+  'Approved': 'Disetujui · Tunggu Bayar',
+  'Confirming': 'Menunggu Konfirmasi',
+  'Paid': 'Lunas',
+  'Ongoing': 'Berjalan',
+  'Completed': 'Selesai',
+  'Rejected': 'Ditolak'
+} %}
+{% set PROGRESS = {'Pending':15,'Approved':35,'Confirming':55,'Paid':70,'Ongoing':85,'Completed':100,'Rejected':100} %}
+
+{% block content %}
+<div class="dashboard-page">
+    
+    <!-- Left Column: User status and active requests -->
+    <div class="dashboard-left">
+        
+        <!-- Welcome Banner -->
+        <div class="welcome-banner glass">
+            <div class="welcome-text">
+                <h2>Halo, {{ session.get('username') }}!</h2>
+                <p>Jurusan: <strong>{{ user['major'] }}</strong></p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Kontak: {{ user['phone'] }} | {{ user['email'] }}</p>
+            </div>
+            <div class="logo-icon" style="width: 50px; height: 50px;">
+                <i data-lucide="user"></i>
+            </div>
+        </div>
+        
+        <!-- Active Requests list -->
+        <div>
+            <h3 class="requests-section-title">Permintaan Bimbingan Saya</h3>
+            
+            <div class="requests-list">
+                {% if requests %}
+                    {% for req in requests %}
+                        <div class="request-card glass">
+                            <div class="request-card-header">
+                                <div class="request-meta">
+                                    <h3>{{ req['field'] }} <span style="font-weight:500;color:var(--text-muted);font-size:0.85rem;">· Paket {{ req['package'] }}</span></h3>
+                                    <span>Diajukan pada: {{ req['created_at'].split(' ')[0] }}</span>
+                                </div>
+                                <span class="status-badge status-{{ req['status'].lower() }}">
+                                    {{ STATUS_LABEL.get(req['status'], req['status']) }}
+                                </span>
+                            </div>
+
+                            <!-- Progress Visualizer -->
+                            {% set pct = PROGRESS.get(req['status'], 15) %}
+                            {% if req['status'] == 'Rejected' %}{% set barcolor = '#dc2626' %}
+                            {% elif req['status'] == 'Completed' %}{% set barcolor = '#047857' %}
+                            {% else %}{% set barcolor = 'var(--color-primary)' %}{% endif %}
+                            <div class="progress-bar-wrapper" style="margin: 1.25rem 0; position: relative;">
+                                <div class="progress-bg" style="width: 100%; height: 6px; background: rgba(0,0,0,0.06); border-radius: 3px;"></div>
+                                <div class="progress-fill" style="position:absolute; top:0; left:0; height:6px; background:{{ barcolor }}; border-radius:3px; width:{{ pct }}%;"></div>
+                            </div>
+
+                            <p style="font-size:0.9rem;"><strong>Deskripsi:</strong> {{ req['description'] }}</p>
+
+                            <!-- Detail jadwal / harga / catatan -->
+                            {% if req['scheduled_date'] or req['price'] or req['admin_note'] %}
+                            <div class="request-detail">
+                                {% if req['scheduled_date'] %}<div><i data-lucide="calendar-clock"></i> Jadwal: <strong>{{ req['scheduled_date'] }}</strong></div>{% endif %}
+                                {% if req['price'] %}<div><i data-lucide="tag"></i> Harga: <strong>Rp{{ '{:,.0f}'.format(req['price']).replace(',', '.') }}</strong></div>{% endif %}
+                                {% if req['admin_note'] %}<div class="{{ 'note-reject' if req['status'] == 'Rejected' else '' }}"><i data-lucide="message-square"></i> {{ 'Alasan' if req['status'] == 'Rejected' else 'Catatan admin' }}: {{ req['admin_note'] }}</div>{% endif %}
+                            </div>
+                            {% endif %}
+
+                            <!-- Aksi klien -->
+                            {% if req['status'] == 'Approved' %}
+                            <button class="btn btn-primary btn-pay" data-id="{{ req['id'] }}" data-price="{{ req['price'] }}" data-field="{{ req['field'] }}" style="margin-top:1rem;width:100%;">
+                                <i data-lucide="credit-card" style="width:18px;height:18px;"></i> Bayar Sekarang
+                            </button>
+                            {% elif req['status'] == 'Confirming' %}
+                            <p class="pay-hint">⏳ Pembayaran sedang diverifikasi admin.</p>
+                            {% elif req['status'] == 'Paid' %}
+                            <p class="pay-hint paid">✅ Pembayaran lunas — bimbingan segera dimulai.</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-requests glass">
+                        <i data-lucide="folder-open"></i>
+                        <p>Belum ada permintaan kelas bimbingan aktif.</p>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:5px;">Gunakan formulir di sebelah kanan untuk membuat pengajuan baru.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Right Column: Services Catalog Deskripsi (Bimbingan Info) -->
+    <div class="dashboard-right">
+        
+        <!-- Services Info Description (Jokian Details Catalog) -->
+        <div class="glass" style="padding: 2.25rem 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+            <h3 style="font-size: 1.5rem; border-left: 4px solid var(--color-accent); padding-left: 10px;">Layanan Bimbingan Belajar</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                
+                <!-- Teknik Elektro & IT -->
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
+                    <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
+                        <i data-lucide="cpu" style="width:18px; height:18px"></i> Teknik Elektro & Instrumentasi
+                    </h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
+                        Pendampingan pemrograman mikrokontroler (Arduino, ESP32, PLC), skema sirkuit daya, sensor, dan perancangan otomatisasi sistem.
+                    </p>
+                </div>
+                
+                <!-- Software & IT -->
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
+                    <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
+                        <i data-lucide="code-2" style="width:18px; height:18px"></i> IT & Rekayasa Perangkat Lunak
+                    </h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
+                        Bimbingan coding web, aplikasi mobile, struktur data, REST API, implementasi database relasional, dan review keandalan program.
+                    </p>
+                </div>
+                
+                <!-- Data & Statistik -->
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
+                    <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
+                        <i data-lucide="line-chart" style="width:18px; height:18px"></i> Data Science & Analisis Statistik
+                    </h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
+                        Bantuan pengolahan data statistik menggunakan SPSS, R, Python, perumusan regresi, pengujian hipotesis, dan modeling machine learning.
+                    </p>
+                </div>
+                
+                <!-- Sipil, Mesin, Kimia -->
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
+                    <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
+                        <i data-lucide="settings" style="width:18px; height:18px"></i> Sipil, Mesin & Rekayasa Fisik
+                    </h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
+                        Review gambar teknik AutoCAD/SketchUp, pemodelan struktur SAP2000, simulasi termal CFD, dan simulasi proses reaksi kimia.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Request Submission Form -->
+        <div class="dashboard-form-card glass">
+            <h3>Ajukan Bimbingan Baru</h3>
+            <form id="dashboardBookingForm">
+                <div class="form-group">
+                    <label for="dashField">Bidang Bimbingan</label>
+                    <select id="dashField" required>
+                        <option value="" disabled selected>Pilih bidang bimbingan</option>
+                        <option value="Teknik Elektro">Teknik Elektro</option>
+                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
+                        <option value="Data Science & Statistik">Data Science & Statistik</option>
+                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
+                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
+                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" style="margin-top:1.25rem;">
+                    <label for="dashPackage">Pilihan Paket</label>
+                    <select id="dashPackage" required>
+                        <option value="" disabled selected>Pilih paket bimbingan</option>
+                        <option value="Basic">Basic (Rp149.000 / sesi)</option>
+                        <option value="Pro">Pro (Rp249.000 / sesi)</option>
+                        <option value="Premium">Premium (Rp349.000 / sesi)</option>
+                        <option value="Custom">Custom — Proyek End-to-End (Harga Nego)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" style="margin-top:1.25rem;">
+                    <label for="dashDesc">Deskripsi Kendala Skripsi</label>
+                    <textarea id="dashDesc" rows="4" placeholder="Tuliskan kendala skripsi Anda secara terperinci (misalnya: revisi bab 4, error coding program, dsb)..." required></textarea>
+                </div>
+
+                <div class="form-group" style="margin-top:1.25rem;">
+                    <label for="dashPreferred">Tanggal yang Diinginkan <span style="color:var(--text-muted);font-weight:400;">(opsional)</span></label>
+                    <input type="date" id="dashPreferred">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1.5rem;">Ajukan Bimbingan</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- ============ MODAL PEMBAYARAN ============ -->
+<div class="modal-overlay" id="payOverlay">
+    <div class="modal-box glass">
+        <div class="modal-content">
+            <div class="pay-modal-head">
+                <span class="pay-modal-icon"><i data-lucide="credit-card"></i></span>
+                <div>
+                    <h3>Pembayaran Bimbingan</h3>
+                    <p class="modal-sub" style="margin:2px 0 0;">Transfer ke rekening berikut, lalu klik konfirmasi.</p>
+                </div>
+            </div>
+
+            <div class="pay-total">
+                <span>Total Pembayaran</span>
+                <b id="payAmount">Rp0</b>
+            </div>
+
+            <div class="bank-card">
+                <div class="bank-card-top">
+                    <span class="bank-name-label">Bank BRI</span>
+                    <span class="bank-chip"></span>
+                </div>
+                <div class="bank-number">
+                    <span id="bankNumber">303201032689531</span>
+                    <button type="button" class="bank-copy" id="copyBank" title="Salin nomor rekening"><i data-lucide="copy"></i></button>
+                </div>
+                <div class="bank-holder">a.n. Muhammad Syaiful</div>
+            </div>
+
+            <p class="pay-note"><i data-lucide="info"></i> Pembayaran akan diverifikasi admin setelah transfer kamu terima.</p>
+
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closePayModal()">Batal</button>
+                <button class="btn btn-primary" id="payConfirmBtn">Saya Sudah Transfer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast">
+    <i data-lucide="check-circle-2" class="toast-icon"></i>
+    <span id="toastMsg"></span>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // AJAX submission for dashboard booking form
+    const dashForm = document.getElementById('dashboardBookingForm');
+    if (dashForm) {
+        dashForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const field = document.getElementById('dashField').value;
+            const package = document.getElementById('dashPackage').value;
+            const description = document.getElementById('dashDesc').value;
+            const preferred_date = document.getElementById('dashPreferred').value;
+
+            fetch('/api/requests', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ field, package, description, preferred_date })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showToast('Permintaan bimbingan berhasil dikirim!', 'success');
+                    setTimeout(() => location.reload(), 1100);
+                } else {
+                    showToast('Gagal: ' + data.message, 'error');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('Terjadi kesalahan koneksi.', 'error');
+            });
+        });
+    }
+
+    // When Custom package is chosen, guide the user to describe full scope
+    const dashPkg = document.getElementById('dashPackage');
+    const dashDescEl = document.getElementById('dashDesc');
+    if (dashPkg && dashDescEl) {
+        const DEFAULT_HINT = 'Tuliskan kendala skripsi Anda secara terperinci (misalnya: revisi bab 4, error coding program, dsb)...';
+        const CUSTOM_HINT = 'Jelaskan proyek yang kamu inginkan: tujuan akhir, fitur/ruang lingkup, dan sampai sejauh mana pengerjaannya. Tim kami akan menghubungi untuk diskusi & penawaran harga.';
+        dashPkg.addEventListener('change', () => {
+            dashDescEl.placeholder = dashPkg.value === 'Custom' ? CUSTOM_HINT : DEFAULT_HINT;
+        });
+    }
+
+    // ----- Toast notification -----
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimer = null;
+    function showToast(message, type = 'success') {
+        toastMsg.textContent = message;
+        toast.className = 'toast show toast-' + type;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { toast.className = 'toast'; }, 3500);
+    }
+
+    // ----- Payment modal -----
+    const payOverlay = document.getElementById('payOverlay');
+    const payConfirmBtn = document.getElementById('payConfirmBtn');
+    let payId = null;
+
+    function rupiahFmt(n) { return 'Rp' + Number(n || 0).toLocaleString('id-ID'); }
+    function openPayModal(id, price) {
+        payId = id;
+        document.getElementById('payAmount').textContent = rupiahFmt(price);
+        payConfirmBtn.disabled = false;
+        payOverlay.classList.add('show');
+    }
+    function closePayModal() { payOverlay.classList.remove('show'); payId = null; }
+    payOverlay.addEventListener('click', e => { if (e.target === payOverlay) closePayModal(); });
+
+    document.querySelectorAll('.btn-pay').forEach(btn => {
+        btn.addEventListener('click', () => openPayModal(btn.dataset.id, btn.dataset.price));
+    });
+
+    payConfirmBtn.addEventListener('click', async function () {
+        if (!payId) return;
+        this.disabled = true;
+        try {
+            const res = await fetch(`/api/requests/${payId}/pay`, { method: 'POST' });
+            const data = await res.json();
+            if (data.status === 'success') {
+                closePayModal();
+                showToast(data.message, 'success');
+                setTimeout(() => location.reload(), 1300);
+            } else {
+                showToast('Gagal: ' + data.message, 'error');
+                this.disabled = false;
+            }
+        } catch (err) {
+            showToast('Terjadi kesalahan koneksi.', 'error');
+            this.disabled = false;
+        }
+    });
+
+    // ----- Copy bank account number -----
+    const copyBank = document.getElementById('copyBank');
+    if (copyBank) {
+        copyBank.addEventListener('click', () => {
+            const num = document.getElementById('bankNumber').textContent.trim();
+            navigator.clipboard?.writeText(num).then(
+                () => showToast('Nomor rekening disalin', 'success'),
+                () => showToast('Gagal menyalin', 'error')
+            );
+        });
+    }
+</script>
+{% endblock %}

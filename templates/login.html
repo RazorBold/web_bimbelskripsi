@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Masuk | SkripsiEngineer{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card glass">
+        <div class="auth-header">
+            <h2>Masuk Akun</h2>
+            <p>Akses dashboard bimbingan dan pantau progress skripsi Anda</p>
+        </div>
+        
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="form-group">
+                <label for="email">Alamat Email</label>
+                <input type="email" id="email" name="email" placeholder="name@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Masuk Sekarang</button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Belum memiliki akun? <a href="{{ url_for('register') }}">Daftar disini</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

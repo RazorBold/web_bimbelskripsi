@@ -1,0 +1,485 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <span class="hero-subtitle">BIMBINGAN BELAJAR MAHASISWA</span>
+        <h1 class="hero-title">Bimbingan Skripsi & Tugas Akhir <br><span class="gradient-text">Teknik & Sains</span></h1>
+        <p class="hero-desc">Bantu selesaikan skripsi Anda dengan bimbingan intensif tatap muka online dari mentor berpengalaman. Pemahaman materi 100% siap sidang.</p>
+        
+        <div class="hero-bullets">
+            <div class="bullet-item">
+                <div class="bullet-icon">
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="bullet-info">
+                    <h4>Expert Mentor</h4>
+                    <p>Dosen & praktisi berpengalaman</p>
+                </div>
+            </div>
+            <div class="bullet-item">
+                <div class="bullet-icon">
+                    <i data-lucide="calendar"></i>
+                </div>
+                <div class="bullet-info">
+                    <h4>Bimbingan Fleksibel</h4>
+                    <p>Waktu fleksibel & tatap muka online</p>
+                </div>
+            </div>
+            <div class="bullet-item">
+                <div class="bullet-icon">
+                    <i data-lucide="check-circle-2"></i>
+                </div>
+                <div class="bullet-info">
+                    <h4>Pasti Terbantu</h4>
+                    <p>Dari penentuan judul hingga siap sidang</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Select Bimbingan Form -->
+        <div class="hero-selector glass">
+            <h4>Mau bimbingan di bidang apa?</h4>
+            <div class="selector-group">
+                <div class="selector-input-wrapper">
+                    <select id="quickFieldSelect">
+                        <option value="" disabled selected>Pilih bidang bimbingan</option>
+                        <option value="Teknik Elektro">Teknik Elektro</option>
+                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
+                        <option value="Data Science & Statistik">Data Science & Statistik</option>
+                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
+                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
+                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="quickBook()">Ajukan Kelas</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right side: Clean academic study vector illustration -->
+    <div class="hero-illustration-container">
+        <img src="{{ url_for('static', filename='images/hero_study.jpg') }}" alt="Students studying together" class="hero-3d-object">
+    </div>
+</section>
+
+<!-- Stats Bar Section -->
+<section class="stats-section">
+    <div class="stats-bar glass">
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i data-lucide="users-2"></i>
+            </div>
+            <div class="stat-text">
+                <h3>500+</h3>
+                <p>Mahasiswa Terbantu</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i data-lucide="award"></i>
+            </div>
+            <div class="stat-text">
+                <h3>100+</h3>
+                <p>Mentor Expert</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i data-lucide="graduation-cap"></i>
+            </div>
+            <div class="stat-text">
+                <h3>200+</h3>
+                <p>Kelas Selesai</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i data-lucide="star"></i>
+            </div>
+            <div class="stat-text">
+                <h3>4.9/5</h3>
+                <p>Rating Kepuasan</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pilihan Bidang Bimbingan Section -->
+<section class="fields-section" id="bidang">
+    <div class="section-header">
+        <h2>Pilihan Bidang Bimbingan</h2>
+        <p>Berbagai disiplin ilmu teknik dan sains yang didukung oleh mentor kami</p>
+    </div>
+    
+    <div class="fields-grid">
+        <div class="field-card glass" onclick="selectField('Teknik Elektro')">
+            <div class="field-icon">
+                <i data-lucide="cpu"></i>
+            </div>
+            <h3>Teknik Elektro</h3>
+            <p>Arus kuat, mikroelektronika, sistem kendali otomasi, PLC, telekomunikasi, dan instalasi daya listrik.</p>
+            <span class="field-tags">#Kontrol #Daya #Telekomunikasi</span>
+        </div>
+        
+        <div class="field-card glass" onclick="selectField('IT & Sistem Informasi')">
+            <div class="field-icon">
+                <i data-lucide="code-2"></i>
+            </div>
+            <h3>IT & Sistem Informasi</h3>
+            <p>Aplikasi web/mobile fullstack, basis data relasional, GIS (Geografis), keamanan jaringan, & sistem ERP.</p>
+            <span class="field-tags">#Software #Database #WebDev</span>
+        </div>
+        
+        <div class="field-card glass" onclick="selectField('Data Science & Statistik')">
+            <div class="field-icon">
+                <i data-lucide="line-chart"></i>
+            </div>
+            <h3>Data Science & Statistik</h3>
+            <p>Analisis regresi, visualisasi data, machine learning, pengujian hipotesis, riset operasi (R, SPSS, Python).</p>
+            <span class="field-tags">#Statistika #SPSS #Python</span>
+        </div>
+        
+        <div class="field-card glass" onclick="selectField('Teknik Sipil & Arsitektur')">
+            <div class="field-icon">
+                <i data-lucide="home"></i>
+            </div>
+            <h3>Teknik Sipil & Arsitektur</h3>
+            <p>Analisis struktur bangunan (SAP2000), estimasi biaya (RAB), pemetaan wilayah, desain gambar AutoCAD/SketchUp.</p>
+            <span class="field-tags">#AutoCAD #Struktur #SAP2000</span>
+        </div>
+        
+        <div class="field-card glass" onclick="selectField('Teknik Mesin & Industri')">
+            <div class="field-icon">
+                <i data-lucide="settings"></i>
+            </div>
+            <h3>Teknik Mesin & Industri</h3>
+            <p>Desain CAD/CAM, manufaktur, simulasi CFD termal, optimasi supply chain, & manajemen keselamatan kerja (K3).</p>
+            <span class="field-tags">#CAD #CFD #Manufaktur</span>
+        </div>
+        
+        <div class="field-card glass" onclick="selectField('Teknik Kimia & Lingkungan')">
+            <div class="field-icon">
+                <i data-lucide="droplet"></i>
+            </div>
+            <h3>Teknik Kimia & Lingkungan</h3>
+            <p>Simulasi proses kimia, energi terbarukan, pengelolaan limbah industri, AMDAL, & pemurnian air bersih.</p>
+            <span class="field-tags">#SimulasiProses #AMDAL #Energi</span>
+        </div>
+    </div>
+</section>
+
+<!-- Fitur Unggulan Section -->
+<section class="features-section">
+    <div class="section-header">
+        <h2>Mengapa Memilih Kami?</h2>
+        <p>Bimbingan belajar khusus yang siap membantu kendala skripsi Anda secara komprehensif</p>
+    </div>
+    
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-item-icon">
+                <i data-lucide="pocket"></i>
+            </div>
+            <div class="feature-item-text">
+                <h3>Pendekatan Solutif</h3>
+                <p>Kami fokus pada pemahaman konsep skripsi Anda, membantu proses coding, analisis data, atau simulasi secara terarah.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-item-icon">
+                <i data-lucide="users"></i>
+            </div>
+            <div class="feature-item-text">
+                <h3>Mentor Berkualitas</h3>
+                <p>Belajar langsung secara privat bersama lulusan sarjana, magister, dan praktisi industri berpengalaman.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-item-icon">
+                <i data-lucide="lock"></i>
+            </div>
+            <div class="feature-item-text">
+                <h3>Aman & Transparan</h3>
+                <p>Proses bimbingan yang ramah, penjadwalan teratur, dan sistem pembayaran bertahap demi kenyamanan bersama.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cara Kerja Section -->
+<section class="how-it-works" id="cara-kerja">
+    <div class="section-header">
+        <h2>Bagaimana Cara Kerjanya?</h2>
+        <p>Alur bimbingan yang terstruktur dari konsultasi awal hingga siap menghadapi dosen penguji</p>
+    </div>
+    
+    <div class="roadmap-container">
+        <div class="roadmap-card glass">
+            <div class="roadmap-num">1</div>
+            <h3>Pilih Bidang</h3>
+            <p>Pilih topik bimbingan skripsi atau ajukan topik custom.</p>
+        </div>
+        <div class="roadmap-card glass">
+            <div class="roadmap-num">2</div>
+            <h3>Diskusi Awal</h3>
+            <p>Konsultasi dengan mentor tentang kendala penulisan & analisis.</p>
+        </div>
+        <div class="roadmap-card glass">
+            <div class="roadmap-num">3</div>
+            <h3>Pilih Jadwal</h3>
+            <p>Tentukan waktu bimbingan yang cocok dengan jadwal kuliah Anda.</p>
+        </div>
+        <div class="roadmap-card glass">
+            <div class="roadmap-num">4</div>
+            <h3>Sesi Bimbingan</h3>
+            <p>Bimbingan interaktif online satu-lawan-satu membahas detail revisi.</p>
+        </div>
+        <div class="roadmap-card glass">
+            <div class="roadmap-num">5</div>
+            <h3>Siap Sidang</h3>
+            <p>Penguasaan materi 100% sehingga Anda percaya diri saat presentasi.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Paket & Harga Section -->
+<section class="pricing-section" id="harga">
+    <div class="section-header">
+        <h2>Paket Bimbingan Belajar</h2>
+        <p>Pilih paket sesuai dengan target pencapaian skripsi Anda</p>
+    </div>
+    
+    <div class="pricing-grid">
+        <!-- Basic -->
+        <div class="pricing-card glass">
+            <div class="pricing-header">
+                <h3>Basic</h3>
+                <p>Bimbingan Ringkas</p>
+                <div class="price-box">
+                    <span class="price-val">Rp149.000</span>
+                    <span class="price-period">/ sesi</span>
+                </div>
+            </div>
+            <hr class="mobile-divider">
+            <ul class="pricing-features">
+                <li><i data-lucide="check"></i> Durasi 60 menit/sesi</li>
+                <li><i data-lucide="check"></i> Sesi tatap muka online via Meet</li>
+                <li><i data-lucide="check"></i> Review core masalah & solusi</li>
+                <li><i data-lucide="check"></i> Rekaman video sesi belajar</li>
+                <li><i data-lucide="x" style="color: var(--text-muted)"></i> Konsultasi harian via WhatsApp</li>
+            </ul>
+            <a href="#custom-form" class="btn btn-secondary" onclick="selectPricing('Basic')">Pilih Paket</a>
+        </div>
+        
+        <!-- Pro -->
+        <div class="pricing-card glass premium-highlight">
+            <span class="badge-popular">Paling Populer</span>
+            <div class="pricing-header">
+                <h3>Pro</h3>
+                <p>Bimbingan Intensif</p>
+                <div class="price-box">
+                    <span class="price-val">Rp249.000</span>
+                    <span class="price-period">/ sesi</span>
+                </div>
+            </div>
+            <hr class="mobile-divider">
+            <ul class="pricing-features">
+                <li><i data-lucide="check"></i> Durasi 90 menit/sesi</li>
+                <li><i data-lucide="check"></i> Sesi tatap muka online via Meet</li>
+                <li><i data-lucide="check"></i> Review coding / rumus / model lengkap</li>
+                <li><i data-lucide="check"></i> File materi & rekaman sesi</li>
+                <li><i data-lucide="check"></i> Prioritas penjadwalan bimbingan</li>
+            </ul>
+            <a href="#custom-form" class="btn btn-primary" onclick="selectPricing('Pro')">Pilih Paket</a>
+        </div>
+        
+        <!-- Premium -->
+        <div class="pricing-card glass">
+            <div class="pricing-header">
+                <h3>Premium</h3>
+                <p>Bimbingan Lengkap</p>
+                <div class="price-box">
+                    <span class="price-val">Rp349.000</span>
+                    <span class="price-period">/ sesi</span>
+                </div>
+            </div>
+            <hr class="mobile-divider">
+            <ul class="pricing-features">
+                <li><i data-lucide="check"></i> Durasi 120 menit/sesi</li>
+                <li><i data-lucide="check"></i> Pendampingan coding & data end-to-end</li>
+                <li><i data-lucide="check"></i> Pengecekan draf Bab 1 s.d Bab 5</li>
+                <li><i data-lucide="check"></i> Contoh kode, file simulasi, & materi</li>
+                <li><i data-lucide="check"></i> Konsultasi chat WhatsApp harian</li>
+            </ul>
+            <a href="#custom-form" class="btn btn-secondary" onclick="selectPricing('Premium')">Pilih Paket</a>
+        </div>
+    </div>
+
+    <!-- Custom End-to-End Package -->
+    <div class="custom-package-banner">
+        <div class="custom-package-info">
+            <span class="custom-package-tag">Proyek End-to-End</span>
+            <h3>Paket Custom</h3>
+            <p>Butuh proyek dikerjakan dari nol sampai jadi? Ceritakan kamu mau apa dan sampai sejauh mana, lalu kita diskusikan ruang lingkupnya bersama.</p>
+            <ul class="custom-package-features">
+                <li><i data-lucide="check-circle-2"></i> Dikerjakan menyeluruh hingga selesai (siap pakai)</li>
+                <li><i data-lucide="check-circle-2"></i> Scope fleksibel: tentukan tujuan akhir & batasan proyek</li>
+                <li><i data-lucide="check-circle-2"></i> Pendampingan, dokumentasi, & penjelasan lengkap</li>
+                <li><i data-lucide="check-circle-2"></i> Harga menyesuaikan kompleksitas — deal bersama (nego)</li>
+            </ul>
+        </div>
+        <div class="custom-package-action">
+            <span class="custom-package-price">Harga</span>
+            <span class="custom-package-nego">Nego</span>
+            <span class="custom-package-note">sesuai kebutuhan proyek</span>
+            <a href="#custom-form" class="btn btn-accent" onclick="selectPricing('Custom')">Diskusikan Proyek</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial Section -->
+<section class="testimonial-section" id="testimonial">
+    <div class="section-header">
+        <h2>Kisah Sukses Mahasiswa</h2>
+        <p>Testimoni dari rekan mahasiswa yang telah lulus sidang skripsi dengan nilai memuaskan</p>
+    </div>
+    
+    <div class="testimonial-container">
+        <div class="testimonial-card glass">
+            <p class="test-quote">"Pemberian materi dari mentor sangat sistematis. Skripsi PLC dan otomasi industri saya akhirnya selesai dengan pemahaman coding yang matang."</p>
+            <div class="test-user">
+                <div class="user-avatar">RP</div>
+                <div class="user-info">
+                    <h4>Rizky Pratama</h4>
+                    <p>Teknik Elektro - UNDIP</p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card glass">
+            <p class="test-quote">"Sangat terbantu untuk pengujian statistik dan hipotesis skripsi saya. Penjelasannya terstruktur dan mudah diterangkan di depan dosen penguji."</p>
+            <div class="test-user">
+                <div class="user-avatar">DL</div>
+                <div class="user-info">
+                    <h4>Dewi Lestari</h4>
+                    <p>Teknik Industri - UGM</p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card glass">
+            <p class="test-quote">"Simulink MATLAB untuk kontrol struktur jembatan penyeberangan saya akhirnya bekerja. Mentor sangat responsif membimbing revisi."</p>
+            <div class="test-user">
+                <div class="user-avatar">HR</div>
+                <div class="user-info">
+                    <h4>H. Fatur Rahman</h4>
+                    <p>Teknik Sipil - ITS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom Booking Form Section -->
+<section class="custom-class-section" id="custom-form">
+    <div class="custom-form-container glass">
+        <div class="form-info-side">
+            <h3>Formulir Pengajuan Kelas</h3>
+            <p>Ajukan konsultasi awal bimbingan skripsi dengan mengisi detail permasalahan yang sedang Anda hadapi di bawah ini.</p>
+            <ul class="form-bullets-list">
+                <li><i data-lucide="check-circle-2"></i> Jadwal belajar privat & personal</li>
+                <li><i data-lucide="check-circle-2"></i> Konsultasi judul & rancangan bab</li>
+                <li><i data-lucide="check-circle-2"></i> Pembahasan simulasi, coding, & data</li>
+            </ul>
+        </div>
+        
+        <div class="form-action-side">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="fieldSelect">Bidang Bimbingan</label>
+                    <select id="fieldSelect" required>
+                        <option value="" disabled selected>Pilih bidang bimbingan</option>
+                        <option value="Teknik Elektro">Teknik Elektro</option>
+                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
+                        <option value="Data Science & Statistik">Data Science & Statistik</option>
+                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
+                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
+                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="packageSelect">Pilihan Paket</label>
+                    <select id="packageSelect" required>
+                        <option value="" disabled selected>Pilih paket bimbingan</option>
+                        <option value="Basic">Basic (Rp149.000 / sesi)</option>
+                        <option value="Pro">Pro (Rp249.000 / sesi)</option>
+                        <option value="Premium">Premium (Rp349.000 / sesi)</option>
+                        <option value="Custom">Custom — Proyek End-to-End (Harga Nego)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descriptionInput">Deskripsi Kendala Skripsi</label>
+                    <textarea id="descriptionInput" rows="4" placeholder="Tuliskan kendala skripsi Anda (misal: bingung pengujian data, error coding program, atau kesulitan menulis bab pembahasan)..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferredDate">Tanggal yang Diinginkan <span style="color:var(--text-muted);font-weight:400;">(opsional)</span></label>
+                    <input type="date" id="preferredDate">
+                </div>
+
+                {% if session.get('user_id') %}
+                    <button type="submit" class="btn btn-primary">Ajukan Sekarang</button>
+                {% else %}
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <a href="{{ url_for('login') }}" class="btn btn-primary">Login untuk Mengajukan</a>
+                        <p style="font-size:0.75rem; text-align:center; color:var(--text-muted)">*Anda harus masuk akun untuk mencatat history pengajuan bimbingan.</p>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- GSAP Page Animations & AJAX submission helper -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script>
+    function quickBook() {
+        const selectEl = document.getElementById('quickFieldSelect');
+        const fieldVal = selectEl.value;
+        if (!fieldVal) {
+            alert('Silakan pilih bidang bimbingan terlebih dahulu.');
+            return;
+        }
+        
+        // Scroll to custom-form and select the values
+        document.getElementById('fieldSelect').value = fieldVal;
+        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectField(fieldName) {
+        document.getElementById('fieldSelect').value = fieldName;
+        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectPricing(packageName) {
+        document.getElementById('packageSelect').value = packageName;
+        updateDescHint(packageName);
+        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Guide the user to describe full project scope when Custom is chosen
+    const DEFAULT_DESC_HINT = 'Tuliskan kendala skripsi Anda (misal: bingung pengujian data, error coding program, atau kesulitan menulis bab pembahasan)...';
+    const CUSTOM_DESC_HINT = 'Jelaskan proyek yang kamu inginkan: tujuan akhir, fitur/ruang lingkup, dan sampai sejauh mana pengerjaannya. Tim kami akan menghubungi untuk diskusi & penawaran harga.';
+    function updateDescHint(packageName) {
+        const desc = document.getElementById('descriptionInput');
+        if (desc) desc.placeholder = packageName === 'Custom' ? CUSTOM_DESC_HINT : DEFAULT_DESC_HINT;
+    }
+    const pkgSelect = document.getElementById('packageSelect');
+    if (pkgSelect) pkgSelect.addEventListener('change', () => updateDescHint(pkgSelect.value));
+</script>
+{% endblock %}

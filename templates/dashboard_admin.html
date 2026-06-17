@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Admin | SkripsiEngineer{% endblock %}
+
+{% set STATUS_LABEL = {
+  'Pending': 'Menunggu Review',
+  'Approved': 'Disetujui · Tunggu Bayar',
+  'Confirming': 'Menunggu Konfirmasi',
+  'Paid': 'Lunas',
+  'Ongoing': 'Berjalan',
+  'Completed': 'Selesai',
+  'Rejected': 'Ditolak'
+} %}
+
+{% block content %}
+<div class="admin-page">
+    <div class="admin-container">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <span class="admin-tag">Panel Admin</span>
+                <h1>Halo, {{ user['username'] }} 👋</h1>
+                <p>Kelola pengajuan bimbingan, jadwal, dan pengguna dari sini.</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="admin-stats">
+            <div class="admin-stat glass">
+                <div class="admin-stat-icon" style="background:#eff6ff;color:#1e3a8a;"><i data-lucide="inbox"></i></div>
+                <div><b>{{ stats.total }}</b><span>Total Pengajuan</span></div>
+            </div>
+            <div class="admin-stat glass">
+                <div class="admin-stat-icon" style="background:#fef3c7;color:#b45309;"><i data-lucide="clock"></i></div>
+                <div><b>{{ stats.pending }}</b><span>Perlu Direview</span></div>
+            </div>
+            <div class="admin-stat glass">
+                <div class="admin-stat-icon" style="background:#e0e7ff;color:#4338ca;"><i data-lucide="badge-check"></i></div>
+                <div><b>{{ stats.confirming }}</b><span>Menunggu Konfirmasi</span></div>
+            </div>
+            <div class="admin-stat glass">
+                <div class="admin-stat-icon" style="background:#dcfce7;color:#15803d;"><i data-lucide="wallet"></i></div>
+                <div><b>Rp{{ '{:,.0f}'.format(stats.revenue).replace(',', '.') }}</b><span>Total Pemasukan</span></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-panel="requests">Kelola Pengajuan</button>
+            <button class="admin-tab" data-panel="users">Manajemen User</button>
+        </div>
+
+        <!-- ============ PANEL: REQUESTS ============ -->
+        <div class="admin-panel active" id="panel-requests">
+            <div class="admin-card glass">
+                {% if requests %}
+                <div class="table-scroll">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Klien</th><th>Bidang / Paket</th><th>Deskripsi</th>
+                            <th>Tgl Diminta</th><th>Jadwal</th><th>Harga</th><th>Status</th><th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for r in requests %}
+                        <tr>
+                            <td>
+                                <b>{{ r['username'] }}</b>
+                                <small>{{ r['major'] }}</small>
+                                <small>{{ r['phone'] }}</small>
+                            </td>
+                            <td><b>{{ r['field'] }}</b><small>Paket {{ r['package'] }}</small></td>
+                            <td><div class="desc-cell" title="{{ r['description'] }}">{{ r['description'] }}</div></td>
+                            <td>{{ r['preferred_date'] or '—' }}</td>
+                            <td>{{ r['scheduled_date'] or '—' }}</td>
+                            <td>{% if r['price'] %}Rp{{ '{:,.0f}'.format(r['price']).replace(',', '.') }}{% else %}—{% endif %}</td>
+                            <td><span class="status-badge status-{{ r['status']|lower }}">{{ STATUS_LABEL.get(r['status'], r['status']) }}</span>
+                                {% if r['admin_note'] %}<small class="admin-note-hint" title="{{ r['admin_note'] }}">📝 catatan</small>{% endif %}
+                            </td>
+                            <td>
+                                <div class="row-actions">
+                                <button class="btn-mini btn-mini-ghost" onclick="openDetail({{ r['id'] }})">Detail</button>
+                                {% if r['status'] == 'Pending' %}
+                                    <button class="btn-mini btn-mini-primary" onclick="openApprove({{ r['id'] }}, '{{ r['package'] }}')">Setujui</button>
+                                    <button class="btn-mini btn-mini-danger" onclick="openReject({{ r['id'] }})">Tolak</button>
+                                {% elif r['status'] == 'Confirming' %}
+                                    <button class="btn-mini btn-mini-primary" onclick="setStatus({{ r['id'] }}, 'Paid')">Konfirmasi Bayar</button>
+                                {% elif r['status'] == 'Paid' %}
+                                    <button class="btn-mini btn-mini-primary" onclick="setStatus({{ r['id'] }}, 'Ongoing')">Mulai Bimbingan</button>
+                                {% elif r['status'] == 'Ongoing' %}
+                                    <button class="btn-mini btn-mini-primary" onclick="setStatus({{ r['id'] }}, 'Completed')">Tandai Selesai</button>
+                                {% elif r['status'] == 'Approved' %}
+                                    <span class="muted-action">Menunggu pembayaran klien</span>
+                                {% else %}
+                                    <span class="muted-action">—</span>
+                                {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <div class="admin-empty"><i data-lucide="inbox"></i><p>Belum ada pengajuan masuk.</p></div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ============ PANEL: USERS ============ -->
+        <div class="admin-panel" id="panel-users">
+            <div class="admin-card glass">
+                <div class="table-scroll">
+                <table class="admin-table">
+                    <thead><tr><th>Nama</th><th>Email</th><th>No. WA</th><th>Jurusan</th><th>Role</th><th>Jml Pengajuan</th><th>Bergabung</th></tr></thead>
+                    <tbody>
+                    {% for u in users %}
+                        <tr>
+                            <td><b>{{ u['username'] }}</b></td>
+                            <td>{{ u['email'] }}</td>
+                            <td>{{ u['phone'] }}</td>
+                            <td>{{ u['major'] }}</td>
+                            <td><span class="role-badge role-{{ u['role'] }}">{{ u['role'] }}</span></td>
+                            <td>{{ u['request_count'] }}</td>
+                            <td>{{ u['created_at'].split(' ')[0] if u['created_at'] else '—' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box glass">
+        <!-- Approve -->
+        <div class="modal-content" id="modalApprove">
+            <h3>Setujui Pengajuan</h3>
+            <p class="modal-sub">Tetapkan jadwal final dan harga. Klien akan diminta membayar.</p>
+            <div class="alert-error-box" id="approveErr"></div>
+            <div class="form-group">
+                <label>Jadwal Bimbingan</label>
+                <input type="datetime-local" id="approveSchedule">
+            </div>
+            <div class="form-group" style="margin-top:1rem;">
+                <label>Harga Final (Rp)</label>
+                <input type="number" id="approvePrice" placeholder="contoh: 249000" min="0">
+                <small class="field-hint" id="approveHint"></small>
+            </div>
+            <div class="form-group" style="margin-top:1rem;">
+                <label>Catatan untuk klien (opsional)</label>
+                <textarea id="approveNote" rows="2" placeholder="mis. detail teknis / hasil nego..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" id="approveSubmit">Setujui & Kirim</button>
+            </div>
+        </div>
+        <!-- Reject -->
+        <div class="modal-content" id="modalReject" style="display:none;">
+            <h3>Tolak Pengajuan</h3>
+            <p class="modal-sub">Beri alasan agar klien memahami keputusan.</p>
+            <div class="alert-error-box" id="rejectErr"></div>
+            <div class="form-group">
+                <label>Alasan Penolakan</label>
+                <textarea id="rejectNote" rows="3" placeholder="mis. topik di luar cakupan, jadwal penuh..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+                <button class="btn btn-accent" id="rejectSubmit">Tolak Pengajuan</button>
+            </div>
+        </div>
+        <!-- Detail -->
+        <div class="modal-content" id="modalDetail" style="display:none;">
+            <h3>Detail Pengajuan</h3>
+            <p class="modal-sub">Informasi lengkap pengajuan bimbingan.</p>
+            <div id="detailBody" class="detail-body"></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const PRICES = { Basic: 149000, Pro: 249000, Premium: 349000, Custom: '' };
+    const STATUS_LABEL = {
+        Pending: 'Menunggu Review', Approved: 'Disetujui · Tunggu Bayar',
+        Confirming: 'Menunggu Konfirmasi', Paid: 'Lunas', Ongoing: 'Berjalan',
+        Completed: 'Selesai', Rejected: 'Ditolak'
+    };
+    // Full request data keyed by id (rendered from server).
+    const REQUESTS = {};
+    {{ requests | tojson }}.forEach(r => { REQUESTS[r.id] = r; });
+
+    let activeId = null;
+
+    function showPane(paneId) {
+        ['modalApprove', 'modalReject', 'modalDetail'].forEach(p => {
+            document.getElementById(p).style.display = (p === paneId) ? 'block' : 'none';
+        });
+    }
+    function rupiah(n) { return 'Rp' + Number(n).toLocaleString('id-ID'); }
+    function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+
+    function openDetail(id) {
+        const r = REQUESTS[id];
+        if (!r) return;
+        const rows = [
+            ['Klien', esc(r.username)],
+            ['Email', esc(r.email)],
+            ['No. WhatsApp', esc(r.phone)],
+            ['Jurusan', esc(r.major)],
+            ['Bidang', esc(r.field)],
+            ['Paket', esc(r.package)],
+            ['Status', STATUS_LABEL[r.status] || r.status],
+            ['Tanggal Diminta', esc(r.preferred_date) || '—'],
+            ['Jadwal Final', esc(r.scheduled_date) || '—'],
+            ['Harga', r.price ? rupiah(r.price) : '—'],
+            ['Diajukan', esc((r.created_at || '').split(' ')[0])],
+        ];
+        let html = rows.map(([k, v]) => `<div class="detail-row"><span>${k}</span><b>${v}</b></div>`).join('');
+        html += `<div class="detail-block"><span>Deskripsi</span><p>${esc(r.description)}</p></div>`;
+        if (r.admin_note) html += `<div class="detail-block"><span>Catatan Admin</span><p>${esc(r.admin_note)}</p></div>`;
+        document.getElementById('detailBody').innerHTML = html;
+        showPane('modalDetail');
+        overlay.classList.add('show');
+    }
+
+    // Tabs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+        });
+    });
+
+    // Modal helpers
+    const overlay = document.getElementById('modalOverlay');
+    function closeModal() { overlay.classList.remove('show'); activeId = null; }
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    function openApprove(id, pkg) {
+        activeId = id;
+        showPane('modalApprove');
+        document.getElementById('approveErr').classList.remove('show');
+        document.getElementById('approvePrice').value = PRICES[pkg] ?? '';
+        document.getElementById('approveSchedule').value = '';
+        document.getElementById('approveNote').value = '';
+        document.getElementById('approveHint').textContent =
+            pkg === 'Custom' ? 'Paket Custom — isi harga hasil nego.' : 'Harga default paket ' + pkg + ' (bisa diubah).';
+        overlay.classList.add('show');
+    }
+    function openReject(id) {
+        activeId = id;
+        showPane('modalReject');
+        document.getElementById('rejectErr').classList.remove('show');
+        document.getElementById('rejectNote').value = '';
+        overlay.classList.add('show');
+    }
+
+    async function apiPost(url, body) {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body || {})
+        });
+        return res.json();
+    }
+
+    function showErr(id, msg) {
+        const el = document.getElementById(id);
+        el.textContent = msg; el.classList.add('show');
+    }
+
+    document.getElementById('approveSubmit').addEventListener('click', async function () {
+        const schedule = document.getElementById('approveSchedule').value;
+        const price = document.getElementById('approvePrice').value;
+        const note = document.getElementById('approveNote').value;
+        if (!schedule) return showErr('approveErr', 'Jadwal wajib diisi.');
+        if (!price || Number(price) <= 0) return showErr('approveErr', 'Harga harus berupa angka.');
+        this.disabled = true;
+        const data = await apiPost(`/api/admin/requests/${activeId}/approve`,
+            { scheduled_date: schedule.replace('T', ' '), price: Number(price), note });
+        if (data.status === 'success') location.reload();
+        else { showErr('approveErr', data.message); this.disabled = false; }
+    });
+
+    document.getElementById('rejectSubmit').addEventListener('click', async function () {
+        const note = document.getElementById('rejectNote').value;
+        if (!note.trim()) return showErr('rejectErr', 'Alasan wajib diisi.');
+        this.disabled = true;
+        const data = await apiPost(`/api/admin/requests/${activeId}/reject`, { note });
+        if (data.status === 'success') location.reload();
+        else { showErr('rejectErr', data.message); this.disabled = false; }
+    });
+
+    async function setStatus(id, status) {
+        const labels = { Paid: 'mengonfirmasi pembayaran', Ongoing: 'memulai bimbingan', Completed: 'menandai selesai' };
+        if (!confirm('Yakin ' + (labels[status] || 'mengubah status') + '?')) return;
+        const data = await apiPost(`/api/admin/requests/${id}/status`, { status });
+        if (data.status === 'success') location.reload();
+        else alert(data.message);
+    }
+</script>
+{% endblock %}
