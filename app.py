@@ -179,6 +179,11 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/portfolio")
+def portfolio():
+    return render_template("portfolio.html", user=current_user())
+
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
@@ -202,8 +207,10 @@ def dashboard():
             users=db.get_all_users(),
             stats=stats,
         )
+    reqs = db.get_requests_by_user(user["id"])
+    notes_map = db.get_session_notes_map([r["id"] for r in reqs])
     return render_template(
-        "dashboard.html", user=user, requests=db.get_requests_by_user(user["id"])
+        "dashboard.html", user=user, requests=reqs, notes_map=notes_map
     )
 
 
@@ -311,6 +318,52 @@ def admin_set_status(req_id):
     return jsonify(status="success", message=f"Status diubah ke {new_status}.")
 
 
+@app.route("/api/admin/requests/<int:req_id>/notes", methods=["GET"])
+@admin_required
+def admin_get_notes(req_id):
+    if db.get_request_by_id(req_id) is None:
+        return jsonify(status="error", message="Pengajuan tidak ditemukan."), 404
+    return jsonify(status="success", notes=db.get_session_notes(req_id))
+
+
+@app.route("/api/admin/requests/<int:req_id>/notes", methods=["POST"])
+@admin_required
+def admin_add_note(req_id):
+    if db.get_request_by_id(req_id) is None:
+        return jsonify(status="error", message="Pengajuan tidak ditemukan."), 404
+    data = request.get_json(silent=True) or {}
+    note = (data.get("note") or "").strip()
+    if not note:
+        return jsonify(status="error", message="Catatan tidak boleh kosong."), 400
+    note_id = db.add_session_note(req_id, note)
+    return jsonify(status="success", message="Catatan berhasil ditambahkan.", note_id=note_id)
+
+
+@app.route("/api/requests/<int:req_id>/review", methods=["POST"])
+@api_login_required
+def submit_review(req_id):
+    req = db.get_request_by_id(req_id)
+    if req is None or req["user_id"] != session["user_id"]:
+        return jsonify(status="error", message="Pengajuan tidak ditemukan."), 404
+    if req["status"] != "Completed":
+        return jsonify(status="error", message="Bimbingan belum selesai."), 400
+    if req["review_comment"]:
+        return jsonify(status="error", message="Ulasan sudah pernah dikirim."), 400
+    data = request.get_json(silent=True) or {}
+    comment = (data.get("comment") or "").strip()
+    if not comment:
+        return jsonify(status="error", message="Komentar tidak boleh kosong."), 400
+    raw_rating = data.get("rating")
+    try:
+        rating = int(raw_rating) if raw_rating is not None else None
+        if rating is not None and not (1 <= rating <= 5):
+            raise ValueError
+    except (TypeError, ValueError):
+        rating = None
+    db.add_review(req_id, comment, rating)
+    return jsonify(status="success", message="Terima kasih atas ulasan Anda!")
+
+
 @app.route("/api/admin/users", methods=["GET"])
 @admin_required
 def admin_list_users():
@@ -318,4 +371,4 @@ def admin_list_users():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=int(os.environ.get("PORT", 5001)))
+    app.run(host="0.0.0.0", debug=True, port=int(os.environ.get("PORT", 5027)))

@@ -1,0 +1,808 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Proyek | SkripsiEngineer{% endblock %}
+
+{% block content %}
+
+<!-- Portfolio Hero -->
+<section class="pf-hero">
+    <div class="pf-hero-inner">
+        <span class="pf-hero-tag">KARYA NYATA</span>
+        <h1 class="pf-hero-title">Portfolio <span class="gradient-text">Proyek</span> Kami</h1>
+        <p class="pf-hero-desc">Kumpulan proyek nyata yang telah berhasil dikerjakan — mulai dari sistem IoT presisi tinggi, platform SaaS modern, hingga inovasi healthcare berbasis AI. Bukti nyata kompetensi tim kami.</p>
+        <div class="pf-hero-stats">
+            <div class="pf-stat">
+                <span class="pf-stat-num">12+</span>
+                <span class="pf-stat-lbl">Proyek Selesai</span>
+            </div>
+            <div class="pf-stat-divider"></div>
+            <div class="pf-stat">
+                <span class="pf-stat-num">5</span>
+                <span class="pf-stat-lbl">Domain Keahlian</span>
+            </div>
+            <div class="pf-stat-divider"></div>
+            <div class="pf-stat">
+                <span class="pf-stat-num">100%</span>
+                <span class="pf-stat-lbl">Proyek Berjalan</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Bar -->
+<section class="pf-filter-section">
+    <div class="pf-filter-bar">
+        <button class="pf-filter-btn active" data-filter="all">Semua Proyek</button>
+        <button class="pf-filter-btn" data-filter="iot">IoT & Embedded</button>
+        <button class="pf-filter-btn" data-filter="web">Web & SaaS</button>
+        <button class="pf-filter-btn" data-filter="healthcare">Healthcare</button>
+        <button class="pf-filter-btn" data-filter="ai">AI & Data Science</button>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="pf-grid-section">
+    <div class="pf-grid">
+
+        <!-- 1. Smart Poultry PID -->
+        <div class="pf-card" data-category="iot" onclick="openModal('proj1')">
+            <div class="pf-card-visual pf-visual-blue">
+                <img src="{{ url_for('static', filename='images/portfolio/poultry-pid.jpg') }}"
+                     alt="Smart Poultry Monitoring PID" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="wifi"></i> IoT & Embedded</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-blue">IoT & Embedded</span>
+                    <span class="pf-badge pf-badge-outline">PID Control</span>
+                </div>
+                <h3 class="pf-card-title">Smart Poultry Monitoring & PID Temperature Control</h3>
+                <p class="pf-card-desc">Sistem IIoT untuk mengotomatisasi dan menjaga stabilitas mikroklimat kandang ayam secara real-time menggunakan algoritma PID adaptif.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">ESP32</span>
+                    <span class="pf-tag">MQTT</span>
+                    <span class="pf-tag">PID Algorithm</span>
+                    <span class="pf-tag">Cloud IoT</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 2. Electric Scooter SaaS -->
+        <div class="pf-card" data-category="web" onclick="openModal('proj2')">
+            <div class="pf-card-visual pf-visual-purple">
+                <img src="{{ url_for('static', filename='images/portfolio/scooter-saas.jpg') }}"
+                     alt="Electric Scooter GPS SaaS" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="layout-dashboard"></i> Web & SaaS</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-purple">Web & SaaS</span>
+                    <span class="pf-badge pf-badge-outline">GPS Tracking</span>
+                </div>
+                <h3 class="pf-card-title">Platform SaaS Monitoring Lokasi Skuter Listrik</h3>
+                <p class="pf-card-desc">Platform SaaS profesional dengan UI/UX modern untuk pemantauan armada skuter listrik secara real-time, lengkap dengan geofence dan riwayat perjalanan.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">GPS Module</span>
+                    <span class="pf-tag">React.js</span>
+                    <span class="pf-tag">Maps API</span>
+                    <span class="pf-tag">REST API</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 3. Coffee PID -->
+        <div class="pf-card" data-category="iot" onclick="openModal('proj3')">
+            <div class="pf-card-visual pf-visual-orange">
+                <img src="{{ url_for('static', filename='images/portfolio/coffee-pid.jpg') }}"
+                     alt="Smart Coffee Heater PID" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="wifi"></i> IoT & Embedded</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-orange">IoT & Embedded</span>
+                    <span class="pf-badge pf-badge-outline">Precision Control</span>
+                </div>
+                <h3 class="pf-card-title">Smart Coffee Heater PID Controller</h3>
+                <p class="pf-card-desc">Sistem kontrol pemanas pintar berbasis PID untuk pemanasan biji kopi secara presisi tinggi (±0.5°C) dengan monitoring kurva suhu real-time.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">Mikrokontroler</span>
+                    <span class="pf-tag">PID Algorithm</span>
+                    <span class="pf-tag">SSR</span>
+                    <span class="pf-tag">Temp Probe</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 4. Early Stroke Detection -->
+        <div class="pf-card" data-category="healthcare" onclick="openModal('proj4')">
+            <div class="pf-card-visual pf-visual-red">
+                <img src="{{ url_for('static', filename='images/portfolio/stroke-detect.jpg') }}"
+                     alt="Early Stroke Detection EMG IMU" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="heart-pulse"></i> Healthcare Tech</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-red">Healthcare Tech</span>
+                    <span class="pf-badge pf-badge-outline">AI / Wearable</span>
+                </div>
+                <h3 class="pf-card-title">Early Stroke Detection System Using EMG & IMU</h3>
+                <p class="pf-card-desc">Wearable device untuk deteksi dini risiko stroke melalui analisis aktivitas otot (EMG) dan gerakan (IMU) secara real-time dengan algoritma ML.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">EMG Sensor</span>
+                    <span class="pf-tag">IMU</span>
+                    <span class="pf-tag">Machine Learning</span>
+                    <span class="pf-tag">Wearable</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 5. Hospital BLE Tag Tracking -->
+        <div class="pf-card" data-category="healthcare" onclick="openModal('proj5')">
+            <div class="pf-card-visual pf-visual-teal">
+                <img src="{{ url_for('static', filename='images/portfolio/hospital-ble.jpg') }}"
+                     alt="Medical Equipment BLE Tracking" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="heart-pulse"></i> Healthcare Tech</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-teal">Healthcare Tech</span>
+                    <span class="pf-badge pf-badge-outline">BLE / RTLS</span>
+                </div>
+                <h3 class="pf-card-title">Medical Equipment Location Monitoring (Hospital BLE)</h3>
+                <p class="pf-card-desc">Sistem tracking lokasi peralatan medis (kursi roda, infusion pump) di rumah sakit menggunakan BLE Tag dengan visualisasi floor map real-time.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">BLE Beacon</span>
+                    <span class="pf-tag">RTLS</span>
+                    <span class="pf-tag">Web Dashboard</span>
+                    <span class="pf-tag">Hospital IoT</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 6. Smart Poultry Feeding Automation -->
+        <div class="pf-card" data-category="iot" onclick="openModal('proj6')">
+            <div class="pf-card-visual pf-visual-green">
+                <img src="{{ url_for('static', filename='images/portfolio/poultry-feed.jpg') }}"
+                     alt="Smart Poultry Feeding Automation" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="wifi"></i> IoT & Embedded</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-green">IoT & Embedded</span>
+                    <span class="pf-badge pf-badge-outline">Automation</span>
+                </div>
+                <h3 class="pf-card-title">Smart Poultry Feeding Automation</h3>
+                <p class="pf-card-desc">Sistem pemberi pakan otomatis berbasis servo motor dengan jadwal terprogram, monitoring via Android, dan laporan harian konsumsi pakan ternak.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">Arduino</span>
+                    <span class="pf-tag">Servo Motor</span>
+                    <span class="pf-tag">Android App</span>
+                    <span class="pf-tag">IoT</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 7. Smart Agriculture Monitoring -->
+        <div class="pf-card" data-category="iot" onclick="openModal('proj7')">
+            <div class="pf-card-visual pf-visual-green">
+                <img src="{{ url_for('static', filename='images/portfolio/agriculture.jpg') }}"
+                     alt="Smart Agriculture Monitoring System" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="wifi"></i> IoT & Embedded</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-green">IoT & Embedded</span>
+                    <span class="pf-badge pf-badge-outline">Smart Farming</span>
+                </div>
+                <h3 class="pf-card-title">Smart Agriculture Monitoring System</h3>
+                <p class="pf-card-desc">Sistem monitoring cerdas untuk greenhouse/pertanian yang memantau suhu, kelembaban, dan kualitas udara secara real-time dengan dashboard IoT terintegrasi.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">ESP32</span>
+                    <span class="pf-tag">DHT22</span>
+                    <span class="pf-tag">MQ Sensor</span>
+                    <span class="pf-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 8. Electricity Forecasting LSTM -->
+        <div class="pf-card" data-category="ai" onclick="openModal('proj8')">
+            <div class="pf-card-visual pf-visual-indigo">
+                <img src="{{ url_for('static', filename='images/portfolio/lstm-energy.jpg') }}"
+                     alt="Electricity Forecasting LSTM" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="bar-chart-2"></i> AI & Data Science</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-indigo">AI & Data Science</span>
+                    <span class="pf-badge pf-badge-outline">LSTM / ML</span>
+                </div>
+                <h3 class="pf-card-title">Electricity Consumption Forecasting Using LSTM</h3>
+                <p class="pf-card-desc">Sistem prediksi konsumsi listrik menggunakan LSTM Neural Network dengan akurasi 80.9%, dilengkapi Business Intelligence dashboard dan analisis data power meter.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">Python</span>
+                    <span class="pf-tag">TensorFlow</span>
+                    <span class="pf-tag">LSTM</span>
+                    <span class="pf-tag">BI Dashboard</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 9. Smart Flood Monitoring -->
+        <div class="pf-card" data-category="iot" onclick="openModal('proj9')">
+            <div class="pf-card-visual pf-visual-blue">
+                <img src="{{ url_for('static', filename='images/portfolio/flood-monitor.jpg') }}"
+                     alt="Smart Flood Monitoring Early Warning" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="wifi"></i> IoT & Embedded</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-blue">IoT & Embedded</span>
+                    <span class="pf-badge pf-badge-outline">Early Warning</span>
+                </div>
+                <h3 class="pf-card-title">Smart Flood Monitoring & Early Warning System</h3>
+                <p class="pf-card-desc">Sistem monitoring ketinggian air sungai berbasis IoT solar-powered dengan konektivitas 4G/NB-IoT dan sistem early warning push notification otomatis.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">IoT Datalogger</span>
+                    <span class="pf-tag">Solar Panel</span>
+                    <span class="pf-tag">4G/NB-IoT</span>
+                    <span class="pf-tag">Push Notif</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 10. GPS Container Tracking -->
+        <div class="pf-card" data-category="web" onclick="openModal('proj10')">
+            <div class="pf-card-visual pf-visual-dark">
+                <img src="{{ url_for('static', filename='images/portfolio/container-gps.jpg') }}"
+                     alt="GPS Container Tracking Solar" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="map-pin"></i> Web & SaaS</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-purple">Web & SaaS</span>
+                    <span class="pf-badge pf-badge-outline">GPS / Solar</span>
+                </div>
+                <h3 class="pf-card-title">GPS Container Tracking (Solar Powered Device)</h3>
+                <p class="pf-card-desc">Sistem tracking GPS container pengiriman bertenaga surya dengan dashboard monitoring global, histori lokasi, dan pemantauan battery health perangkat.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">GPS Tracker</span>
+                    <span class="pf-tag">Solar Power</span>
+                    <span class="pf-tag">GSM</span>
+                    <span class="pf-tag">Web Dashboard</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+        <!-- 11. AI Smart Waste Monitoring -->
+        <div class="pf-card" data-category="ai" onclick="openModal('proj11')">
+            <div class="pf-card-visual pf-visual-green">
+                <img src="{{ url_for('static', filename='images/portfolio/smart-waste.jpg') }}"
+                     alt="AI Smart Waste Monitoring" class="pf-card-img" onerror="this.style.display='none'">
+                <div class="pf-visual-overlay"></div>
+                <div class="pf-visual-bottom">
+                    <span class="pf-visual-cat-badge"><i data-lucide="bar-chart-2"></i> AI & Data Science</span>
+                </div>
+            </div>
+            <div class="pf-card-body">
+                <div class="pf-card-meta">
+                    <span class="pf-badge pf-badge-indigo">AI & Data Science</span>
+                    <span class="pf-badge pf-badge-outline">Computer Vision</span>
+                </div>
+                <h3 class="pf-card-title">AI Smart Waste Monitoring System</h3>
+                <p class="pf-card-desc">Sistem monitoring level sampah cerdas menggunakan AI Computer Vision via CCTV, dengan dashboard Smart Village dan analitik koleksi sampah real-time.</p>
+                <div class="pf-card-tags">
+                    <span class="pf-tag">Computer Vision</span>
+                    <span class="pf-tag">YOLOv8</span>
+                    <span class="pf-tag">IoT Camera</span>
+                    <span class="pf-tag">Smart Village</span>
+                </div>
+            </div>
+            <div class="pf-card-footer">
+                <span class="pf-detail-link">Lihat Detail <i data-lucide="arrow-right"></i></span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="pf-cta-inline glass">
+        <div class="pf-cta-inline-text">
+            <h3>Punya Ide Proyek Serupa?</h3>
+            <p>Tim kami siap membantu mewujudkan proyek IoT, Web, Healthcare, atau AI impian Anda — dari konsultasi hingga selesai.</p>
+        </div>
+        <div class="pf-cta-inline-actions">
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary">Konsultasi Gratis</a>
+            <a href="{{ url_for('index') }}#harga" class="btn btn-outline">Lihat Paket</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== MODALS ===================== -->
+
+<!-- Modal 1: Smart Poultry PID -->
+<div class="pf-modal-overlay" id="modal-proj1">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj1')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/poultry-pid.jpg') }}" alt="Smart Poultry PID" onerror="this.parentElement.style.background='linear-gradient(135deg,#1e3a8a,#0284c7)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-blue">IoT & Embedded</span>
+                <span class="pf-badge pf-badge-outline">IIoT</span>
+                <span class="pf-badge pf-badge-outline">PID Control</span>
+            </div>
+            <h2>Smart Poultry Monitoring & PID Temperature Control</h2>
+            <p class="pf-modal-lead">Sistem berbasis IIoT yang dirancang khusus untuk mengotomatisasi dan menjaga stabilitas mikroklimat kandang ayam secara real-time, meningkatkan produktivitas dan menekan angka mortalitas ternak.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Suhu & Kelembapan Real-time</strong> — Sensor digital presisi tinggi memantau dinamika suhu secara kontinu, disajikan dalam grafik interaktif.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Kontrol Otomatis Berbasis Algoritma PID</strong> — Mengatur daya heater dan kecepatan exhaust fan secara gradual untuk mencegah fluktuasi ekstrem dan meningkatkan efisiensi energi.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Dashboard Multi-Platform (Web & Mobile)</strong> — Akses penuh kendali kapan saja, dilengkapi notifikasi peringatan jika anomali terdeteksi.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">ESP32</span><span class="pf-tag">MQTT</span><span class="pf-tag">DHT22</span>
+                <span class="pf-tag">PID Algorithm</span><span class="pf-tag">Cloud IoT</span><span class="pf-tag">PWM</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj1')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2: Electric Scooter SaaS -->
+<div class="pf-modal-overlay" id="modal-proj2">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj2')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/scooter-saas.jpg') }}" alt="Scooter SaaS" onerror="this.parentElement.style.background='linear-gradient(135deg,#4c1d95,#7c3aed)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-purple">Web & SaaS</span>
+                <span class="pf-badge pf-badge-outline">GPS Tracking</span>
+                <span class="pf-badge pf-badge-outline">Fleet Management</span>
+            </div>
+            <h2>Platform SaaS Monitoring Lokasi Skuter Listrik</h2>
+            <p class="pf-modal-lead">Platform SaaS profesional dengan desain UI/UX modern untuk pemantauan dan pengelolaan armada skuter listrik secara real-time dengan akurasi tinggi.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Tracking GPS Real-time</strong> — Pantau lokasi setiap skuter di peta langsung, termasuk kecepatan dan status baterai.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Riwayat Perjalanan</strong> — Akses rute, jarak, dan durasi setiap perjalanan untuk efisiensi operasional armada.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Geofence Alerts</strong> — Notifikasi otomatis jika skuter masuk atau keluar area yang ditentukan.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">GPS Module</span><span class="pf-tag">React.js</span><span class="pf-tag">Maps API</span>
+                <span class="pf-tag">REST API</span><span class="pf-tag">WebSocket</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj2')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3: Coffee PID -->
+<div class="pf-modal-overlay" id="modal-proj3">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj3')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/coffee-pid.jpg') }}" alt="Coffee PID" onerror="this.parentElement.style.background='linear-gradient(135deg,#7c2d12,#f97316)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-orange">IoT & Embedded</span>
+                <span class="pf-badge pf-badge-outline">Precision Control</span>
+            </div>
+            <h2>Smart Coffee Heater PID Controller</h2>
+            <p class="pf-modal-lead">Sistem kontrol pemanas pintar berbasis PID untuk pemanasan biji kopi secara presisi, memastikan stabilitas suhu optimal dan profil pemanasan yang konsisten.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>PID Temperature Control</strong> — Kontrol suhu adaptif untuk mencegah overshoot dan menjaga stabilitas target suhu.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Presisi Tinggi (±0.5°C)</strong> — Sensor akurasi tinggi memastikan suhu ideal tercapai secara konsisten.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Dashboard Monitoring Real-time</strong> — Grafik kurva suhu aktual vs target ditampilkan langsung di laptop.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="package"></i> Spesifikasi Teknis</h4>
+                <div class="pf-modal-specs">
+                    <div class="pf-spec-row"><span>Kontroler</span><span>MCU High Performance + Fast Signal Processing</span></div>
+                    <div class="pf-spec-row"><span>Sensor Suhu</span><span>High-accuracy Probe (Stainless Steel, tahan panas)</span></div>
+                    <div class="pf-spec-row"><span>Pemanas</span><span>Heating Element + SSR (Solid State Relay)</span></div>
+                </div>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">Mikrokontroler</span><span class="pf-tag">PID</span><span class="pf-tag">SSR</span>
+                <span class="pf-tag">Temp Probe</span><span class="pf-tag">Serial Comm</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj3')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 4: Stroke Detection -->
+<div class="pf-modal-overlay" id="modal-proj4">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj4')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/stroke-detect.jpg') }}" alt="Stroke Detection" onerror="this.parentElement.style.background='linear-gradient(135deg,#7f1d1d,#dc2626)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-red">Healthcare Tech</span>
+                <span class="pf-badge pf-badge-outline">Wearable</span>
+                <span class="pf-badge pf-badge-outline">Machine Learning</span>
+            </div>
+            <h2>Early Stroke Detection System Using EMG & IMU</h2>
+            <p class="pf-modal-lead">Wearable device inovatif yang menggabungkan sensor EMG dan IMU untuk memantau anomali aktivitas otot dan pola gerakan sebagai indikator dini risiko stroke.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Sensor Biometrik Hibrida (EMG & IMU)</strong> — Deteksi perubahan aktivitas otot + pelacakan orientasi gerakan multi-sumbu yang presisi.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Analisis Gerakan Real-time</strong> — Pemantauan anomali, asimetri, dan kelemahan otot unilateral sebagai indikator awal stroke.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Algoritma ML Diagnostik</strong> — Thresholding adaptif untuk menghitung probabilitas risiko stroke secara proaktif.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">EMG Sensor</span><span class="pf-tag">IMU (MPU6050)</span><span class="pf-tag">Machine Learning</span>
+                <span class="pf-tag">Wearable</span><span class="pf-tag">Medical Grade</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj4')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 5: Hospital BLE -->
+<div class="pf-modal-overlay" id="modal-proj5">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj5')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/hospital-ble.jpg') }}" alt="Hospital BLE" onerror="this.parentElement.style.background='linear-gradient(135deg,#0c4a6e,#0284c7)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-teal">Healthcare Tech</span>
+                <span class="pf-badge pf-badge-outline">BLE / RTLS</span>
+                <span class="pf-badge pf-badge-outline">Asset Tracking</span>
+            </div>
+            <h2>Medical Equipment Location Monitoring</h2>
+            <p class="pf-modal-lead">Sistem Real-Time Location System (RTLS) berbasis BLE Tag untuk melacak peralatan medis di seluruh area rumah sakit menggunakan visualisasi floor map interaktif.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>BLE Tag Tracking Real-time</strong> — Setiap peralatan medis (kursi roda, infusion pump) dipasangi BLE tag dan dilacak posisinya secara langsung.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Floor Map Visualization</strong> — Peta denah lantai interaktif menampilkan posisi dan status setiap aset medis.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Dashboard Monitoring</strong> — Manajemen inventaris aset medis yang efisien dengan status real-time.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">BLE Beacon</span><span class="pf-tag">RTLS</span><span class="pf-tag">Web Dashboard</span>
+                <span class="pf-tag">Hospital IoT</span><span class="pf-tag">Asset Management</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj5')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 6: Poultry Feeding -->
+<div class="pf-modal-overlay" id="modal-proj6">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj6')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/poultry-feed.jpg') }}" alt="Poultry Feeding" onerror="this.parentElement.style.background='linear-gradient(135deg,#14532d,#16a34a)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-green">IoT & Embedded</span>
+                <span class="pf-badge pf-badge-outline">Automation</span>
+                <span class="pf-badge pf-badge-outline">Android App</span>
+            </div>
+            <h2>Smart Poultry Feeding Automation</h2>
+            <p class="pf-modal-lead">Sistem otomatisasi pemberian pakan ayam berbasis servo motor dengan penjadwalan terprogram, monitoring real-time via Android, dan laporan harian konsumsi pakan.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Pakan Otomatis via Servo</strong> — Jadwal pemberian pakan terprogram, dikontrol oleh motor servo presisi.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Android Real-time</strong> — Pantau status feeding dan jumlah ternak langsung dari smartphone.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Laporan Harian Ternak</strong> — Data konsumsi pakan harian, jumlah ayam, dan aktivitas ternak tersimpan otomatis.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">Arduino</span><span class="pf-tag">Servo Motor</span><span class="pf-tag">Android App</span>
+                <span class="pf-tag">IoT</span><span class="pf-tag">Bluetooth/WiFi</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj6')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 7: Smart Agriculture -->
+<div class="pf-modal-overlay" id="modal-proj7">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj7')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/agriculture.jpg') }}" alt="Smart Agriculture" onerror="this.parentElement.style.background='linear-gradient(135deg,#14532d,#16a34a)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-green">IoT & Embedded</span>
+                <span class="pf-badge pf-badge-outline">Smart Farming</span>
+            </div>
+            <h2>Smart Agriculture Monitoring System</h2>
+            <p class="pf-modal-lead">Sistem monitoring parameter lingkungan cerdas untuk greenhouse dan pertanian, memantau suhu, kelembaban, dan kualitas udara secara real-time dengan IoT dashboard terintegrasi.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Suhu & Kelembaban</strong> — Sensor lingkungan presisi tinggi memantau kondisi tanaman secara kontinu.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Kualitas Udara</strong> — Sensor gas MQ mendeteksi kadar CO2 dan polutan udara di dalam greenhouse.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Dashboard IoT Real-time</strong> — Visualisasi data lingkungan dari web dan mobile, lengkap dengan alert otomatis.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">ESP32</span><span class="pf-tag">DHT22</span><span class="pf-tag">MQ Sensor</span>
+                <span class="pf-tag">Node.js</span><span class="pf-tag">MQTT</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj7')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 8: LSTM Energy -->
+<div class="pf-modal-overlay" id="modal-proj8">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj8')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/lstm-energy.jpg') }}" alt="LSTM Energy Forecasting" onerror="this.parentElement.style.background='linear-gradient(135deg,#1e1b4b,#4338ca)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-indigo">AI & Data Science</span>
+                <span class="pf-badge pf-badge-outline">LSTM</span>
+                <span class="pf-badge pf-badge-outline">Forecasting</span>
+            </div>
+            <h2>Electricity Consumption Forecasting Using LSTM</h2>
+            <p class="pf-modal-lead">Sistem prediksi konsumsi listrik menggunakan LSTM Neural Network dengan akurasi 80.9%, dilengkapi Business Intelligence dashboard untuk analisis data power meter secara menyeluruh.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Machine Learning LSTM</strong> — Neural network LSTM mempelajari pola konsumsi historis untuk prediksi akurat ke depan.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Prediksi Konsumsi Energi</strong> — Forecast peak demand dan konsumsi listrik harian/mingguan dengan akurasi 80.9%.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Analisis Data Power Meter</strong> — Dashboard BI dengan heatmap, trend mingguan, dan visualisasi neural network structure.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">Python</span><span class="pf-tag">TensorFlow</span><span class="pf-tag">LSTM</span>
+                <span class="pf-tag">BI Dashboard</span><span class="pf-tag">Data Analytics</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj8')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 9: Flood Monitoring -->
+<div class="pf-modal-overlay" id="modal-proj9">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj9')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/flood-monitor.jpg') }}" alt="Flood Monitoring" onerror="this.parentElement.style.background='linear-gradient(135deg,#1e3a8a,#0369a1)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-blue">IoT & Embedded</span>
+                <span class="pf-badge pf-badge-outline">Early Warning</span>
+                <span class="pf-badge pf-badge-outline">Solar Powered</span>
+            </div>
+            <h2>Smart Flood Monitoring & Early Warning System</h2>
+            <p class="pf-modal-lead">Sistem monitoring ketinggian air sungai berbasis IoT solar-powered dengan konektivitas 4G/NB-IoT dan sistem peringatan dini push notification otomatis untuk pencegahan banjir.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Ketinggian Air</strong> — Sensor tekanan submersible mengukur ketinggian air secara presisi dan kontinu.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Early Warning System</strong> — Notifikasi push otomatis ke warga dan integrasi sirene jika ketinggian air melebihi ambang batas.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Solar Powered 24/7</strong> — Beroperasi mandiri dengan panel surya + baterai cadangan, transmisi data via 4G/NB-IoT.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">IoT Datalogger</span><span class="pf-tag">Solar Panel</span><span class="pf-tag">4G/NB-IoT</span>
+                <span class="pf-tag">Push Notif</span><span class="pf-tag">Cloud Server</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj9')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 10: Container GPS -->
+<div class="pf-modal-overlay" id="modal-proj10">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj10')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/container-gps.jpg') }}" alt="Container GPS" onerror="this.parentElement.style.background='linear-gradient(135deg,#1c1917,#44403c)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-purple">Web & SaaS</span>
+                <span class="pf-badge pf-badge-outline">GPS Tracking</span>
+                <span class="pf-badge pf-badge-outline">Solar Powered</span>
+            </div>
+            <h2>GPS Container Tracking (Solar Powered Device)</h2>
+            <p class="pf-modal-lead">Sistem tracking GPS container pengiriman bertenaga panel surya dengan dashboard monitoring global, histori lokasi, dan pemantauan battery health perangkat secara otomatis.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>GPS Tracking Real-time</strong> — Posisi container dipantau secara global via peta interaktif dengan update otomatis.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Solar Powered Device</strong> — Perangkat otonom bertenaga surya, tidak perlu kabel atau baterai eksternal.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Battery Health Monitoring</strong> — Dashboard memantau level baterai, histori lokasi, dan status koneksi perangkat.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">GPS Tracker</span><span class="pf-tag">Solar Power</span><span class="pf-tag">GSM/LTE</span>
+                <span class="pf-tag">Web Dashboard</span><span class="pf-tag">Fleet Management</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj10')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 11: Smart Waste -->
+<div class="pf-modal-overlay" id="modal-proj11">
+    <div class="pf-modal glass">
+        <button class="pf-modal-close" onclick="closeModal('proj11')"><i data-lucide="x"></i></button>
+        <div class="pf-modal-img-header">
+            <img src="{{ url_for('static', filename='images/portfolio/smart-waste.jpg') }}" alt="AI Smart Waste" onerror="this.parentElement.style.background='linear-gradient(135deg,#14532d,#15803d)'">
+            <div class="pf-modal-img-overlay"></div>
+        </div>
+        <div class="pf-modal-content">
+            <div class="pf-modal-meta">
+                <span class="pf-badge pf-badge-indigo">AI & Data Science</span>
+                <span class="pf-badge pf-badge-outline">Computer Vision</span>
+                <span class="pf-badge pf-badge-outline">Smart Village</span>
+            </div>
+            <h2>AI Smart Waste Monitoring System</h2>
+            <p class="pf-modal-lead">Sistem monitoring level sampah cerdas menggunakan kamera CCTV dengan AI Computer Vision untuk mendeteksi kapasitas tempat sampah secara otomatis dan mengelola koleksi sampah Smart Village.</p>
+            <div class="pf-modal-section">
+                <h4><i data-lucide="star"></i> Fitur Utama</h4>
+                <ul class="pf-modal-list">
+                    <li><i data-lucide="check-circle-2"></i><div><strong>AI Computer Vision</strong> — Model AI mendeteksi level pengisian tempat sampah (0–100%) secara otomatis dari kamera.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Monitoring Level Sampah</strong> — Dashboard real-time menampilkan status setiap tempat sampah di peta Smart Village.</div></li>
+                    <li><i data-lucide="check-circle-2"></i><div><strong>Dashboard Smart Village</strong> — Analitik prioritas koleksi, tren mingguan, dan notifikasi bin penuh otomatis.</div></li>
+                </ul>
+            </div>
+            <div class="pf-modal-tags-row">
+                <span class="pf-tag">Computer Vision</span><span class="pf-tag">YOLOv8</span><span class="pf-tag">IoT Camera</span>
+                <span class="pf-tag">Smart Village</span><span class="pf-tag">Python</span>
+            </div>
+            <a href="{{ url_for('index') }}#custom-form" class="btn btn-primary" onclick="closeModal('proj11')">Diskusikan Proyek Serupa</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const filterBtns = document.querySelectorAll('.pf-filter-btn');
+    const cards = document.querySelectorAll('.pf-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                card.style.display = match ? '' : 'none';
+                if (match) card.style.animation = 'pf-fadeInUp 0.35s ease both';
+            });
+        });
+    });
+
+    function openModal(id) {
+        const overlay = document.getElementById('modal-' + id);
+        if (overlay) {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+    }
+
+    function closeModal(id) {
+        const overlay = document.getElementById('modal-' + id);
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    document.querySelectorAll('.pf-modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.pf-modal-overlay.active').forEach(o => {
+                o.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+    });
+</script>
+{% endblock %}

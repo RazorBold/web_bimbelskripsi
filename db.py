@@ -65,8 +65,22 @@ def init_db():
                 scheduled_date TEXT,
                 price          INTEGER,
                 admin_note     TEXT,
+                review_comment TEXT,
+                review_rating  INTEGER,
+                reviewed_at    DATETIME,
                 created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+            )
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS session_notes (
+                id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                request_id INTEGER NOT NULL,
+                note       TEXT    NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (request_id) REFERENCES requests (id) ON DELETE CASCADE
             )
             """
         )
@@ -78,10 +92,13 @@ def init_db():
 
         req_cols = _column_names(conn, "requests")
         for col, ddl in (
-            ("preferred_date", "ALTER TABLE requests ADD COLUMN preferred_date TEXT"),
-            ("scheduled_date", "ALTER TABLE requests ADD COLUMN scheduled_date TEXT"),
-            ("price", "ALTER TABLE requests ADD COLUMN price INTEGER"),
-            ("admin_note", "ALTER TABLE requests ADD COLUMN admin_note TEXT"),
+            ("preferred_date",  "ALTER TABLE requests ADD COLUMN preferred_date TEXT"),
+            ("scheduled_date",  "ALTER TABLE requests ADD COLUMN scheduled_date TEXT"),
+            ("price",           "ALTER TABLE requests ADD COLUMN price INTEGER"),
+            ("admin_note",      "ALTER TABLE requests ADD COLUMN admin_note TEXT"),
+            ("review_comment",  "ALTER TABLE requests ADD COLUMN review_comment TEXT"),
+            ("review_rating",   "ALTER TABLE requests ADD COLUMN review_rating INTEGER"),
+            ("reviewed_at",     "ALTER TABLE requests ADD COLUMN reviewed_at DATETIME"),
         ):
             if col not in req_cols:
                 conn.execute(ddl)
@@ -205,6 +222,56 @@ def update_request_status(req_id, status):
     with _cursor(commit=True) as conn:
         conn.execute(
             "UPDATE requests SET status = ? WHERE id = ?", (status, req_id)
+        )
+
+
+# ---------------------------------------------------------------------------
+# Session note helpers
+# ---------------------------------------------------------------------------
+def add_session_note(request_id, note):
+    with _cursor(commit=True) as conn:
+        cur = conn.execute(
+            "INSERT INTO session_notes (request_id, note) VALUES (?, ?)",
+            (request_id, note),
+        )
+        return cur.lastrowid
+
+
+def get_session_notes(request_id):
+    with _cursor() as conn:
+        rows = conn.execute(
+            "SELECT * FROM session_notes WHERE request_id = ? ORDER BY created_at ASC",
+            (request_id,),
+        ).fetchall()
+    return [dict(row) for row in rows]
+
+
+def get_session_notes_map(request_ids):
+    """Return {request_id: [notes]} for a list of request ids."""
+    if not request_ids:
+        return {}
+    placeholders = ",".join("?" * len(request_ids))
+    with _cursor() as conn:
+        rows = conn.execute(
+            f"SELECT * FROM session_notes WHERE request_id IN ({placeholders}) ORDER BY created_at ASC",
+            list(request_ids),
+        ).fetchall()
+    result = {rid: [] for rid in request_ids}
+    for row in rows:
+        result[row["request_id"]].append(dict(row))
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Review helpers
+# ---------------------------------------------------------------------------
+def add_review(request_id, comment, rating=None):
+    with _cursor(commit=True) as conn:
+        conn.execute(
+            """UPDATE requests
+               SET review_comment = ?, review_rating = ?, reviewed_at = CURRENT_TIMESTAMP
+               WHERE id = ?""",
+            (comment, rating, request_id),
         )
 
 

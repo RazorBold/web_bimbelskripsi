@@ -46,11 +46,10 @@
                     <select id="quickFieldSelect">
                         <option value="" disabled selected>Pilih bidang bimbingan</option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
-                        <option value="Data Science & Statistik">Data Science & Statistik</option>
-                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
-                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
-                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                        <option value="Teknik Elektro Medik">Teknik Elektro Medik</option>
+                        <option value="IT & Teknik Informatika">IT & Teknik Informatika</option>
+                        <option value="IoT & Embedded System">IoT & Embedded System</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
                     </select>
                 </div>
                 <button class="btn btn-primary" onclick="quickBook()">Ajukan Kelas</button>
@@ -110,7 +109,7 @@
 <section class="fields-section" id="bidang">
     <div class="section-header">
         <h2>Pilihan Bidang Bimbingan</h2>
-        <p>Berbagai disiplin ilmu teknik dan sains yang didukung oleh mentor kami</p>
+        <p>Fokus pada bidang IT, Elektro, IoT, dan AI yang siap membantu skripsi kamu</p>
     </div>
     
     <div class="fields-grid">
@@ -119,53 +118,212 @@
                 <i data-lucide="cpu"></i>
             </div>
             <h3>Teknik Elektro</h3>
-            <p>Arus kuat, mikroelektronika, sistem kendali otomasi, PLC, telekomunikasi, dan instalasi daya listrik.</p>
-            <span class="field-tags">#Kontrol #Daya #Telekomunikasi</span>
+            <p>Mikrokontroler (Arduino, ESP32), PLC, sistem kendali otomasi, sirkuit daya, telekomunikasi, dan instalasi listrik.</p>
+            <span class="field-tags">#Arduino #PLC #Kontrol</span>
         </div>
-        
-        <div class="field-card glass" onclick="selectField('IT & Sistem Informasi')">
+
+        <div class="field-card glass" onclick="selectField('Teknik Elektro Medik')">
+            <div class="field-icon">
+                <i data-lucide="activity"></i>
+            </div>
+            <h3>Teknik Elektro Medik</h3>
+            <p>Instrumentasi medis, sensor biomedik, perangkat monitoring pasien, ECG, EEG, dan sistem alat kesehatan berbasis elektronik.</p>
+            <span class="field-tags">#Biomedik #ECG #Sensor</span>
+        </div>
+
+        <div class="field-card glass" onclick="selectField('IT & Teknik Informatika')">
             <div class="field-icon">
                 <i data-lucide="code-2"></i>
             </div>
-            <h3>IT & Sistem Informasi</h3>
-            <p>Aplikasi web/mobile fullstack, basis data relasional, GIS (Geografis), keamanan jaringan, & sistem ERP.</p>
-            <span class="field-tags">#Software #Database #WebDev</span>
+            <h3>IT & Teknik Informatika</h3>
+            <p>Aplikasi web/mobile fullstack, basis data relasional, keamanan jaringan, REST API, dan rekayasa perangkat lunak.</p>
+            <span class="field-tags">#WebDev #Database #Software</span>
         </div>
-        
-        <div class="field-card glass" onclick="selectField('Data Science & Statistik')">
+
+        <div class="field-card glass" onclick="selectField('IoT & Embedded System')">
             <div class="field-icon">
-                <i data-lucide="line-chart"></i>
+                <i data-lucide="wifi"></i>
             </div>
-            <h3>Data Science & Statistik</h3>
-            <p>Analisis regresi, visualisasi data, machine learning, pengujian hipotesis, riset operasi (R, SPSS, Python).</p>
-            <span class="field-tags">#Statistika #SPSS #Python</span>
+            <h3>IoT & Embedded System</h3>
+            <p>Perancangan sistem IoT, pemrograman embedded (RTOS, FreeRTOS), komunikasi MQTT/HTTP, dan integrasi cloud sensor.</p>
+            <span class="field-tags">#IoT #ESP32 #MQTT</span>
         </div>
-        
-        <div class="field-card glass" onclick="selectField('Teknik Sipil & Arsitektur')">
+
+        <div class="field-card glass" onclick="selectField('AI & Data Science')">
             <div class="field-icon">
-                <i data-lucide="home"></i>
+                <i data-lucide="bar-chart-2"></i>
             </div>
-            <h3>Teknik Sipil & Arsitektur</h3>
-            <p>Analisis struktur bangunan (SAP2000), estimasi biaya (RAB), pemetaan wilayah, desain gambar AutoCAD/SketchUp.</p>
-            <span class="field-tags">#AutoCAD #Struktur #SAP2000</span>
+            <h3>AI & Data Science</h3>
+            <p>Machine learning, deep learning, computer vision, NLP, analisis data (Python, TensorFlow, PyTorch), dan visualisasi data.</p>
+            <span class="field-tags">#MachineLearning #Python #AI</span>
         </div>
-        
-        <div class="field-card glass" onclick="selectField('Teknik Mesin & Industri')">
-            <div class="field-icon">
-                <i data-lucide="settings"></i>
-            </div>
-            <h3>Teknik Mesin & Industri</h3>
-            <p>Desain CAD/CAM, manufaktur, simulasi CFD termal, optimasi supply chain, & manajemen keselamatan kerja (K3).</p>
-            <span class="field-tags">#CAD #CFD #Manufaktur</span>
+    </div>
+</section>
+
+<!-- IoT Long Range Communications Section -->
+<section class="iot-comm-section" id="iot-comm">
+    <div class="iot-comm-header">
+        <span class="iot-comm-supertag">KEAHLIAN EKSKLUSIF</span>
+        <h2>Bimbingan Teknologi Komunikasi <span class="gradient-text">IoT Jarak Jauh</span></h2>
+        <p>Tidak semua mentor bisa mengajarkan ini. Kami memiliki pengalaman langsung pada tiga protokol komunikasi IoT low-power jarak jauh yang kini menjadi tulang punggung industri Smart City, Pertanian, dan Logistik modern.</p>
+        <div class="iot-comm-badges">
+            <span class="iot-cb"><i data-lucide="radio"></i> LoRa / LoRaWAN</span>
+            <span class="iot-cb"><i data-lucide="signal"></i> NB-IoT</span>
+            <span class="iot-cb"><i data-lucide="antenna"></i> LTE Cat-1</span>
         </div>
-        
-        <div class="field-card glass" onclick="selectField('Teknik Kimia & Lingkungan')">
-            <div class="field-icon">
-                <i data-lucide="droplet"></i>
+    </div>
+
+    <div class="iot-comm-grid">
+
+        <!-- LoRa Card -->
+        <div class="iot-tech-card">
+            <div class="iot-tech-header iot-lora">
+                <div class="iot-tech-icon-wrap">
+                    <i data-lucide="radio"></i>
+                </div>
+                <div class="iot-tech-title-block">
+                    <span class="iot-tech-proto">📡 LoRa / LoRaWAN</span>
+                    <h3>Long Range, Ultra Low Power</h3>
+                </div>
+                <div class="iot-tech-range-badge">Jangkauan <strong>15+ km</strong></div>
             </div>
-            <h3>Teknik Kimia & Lingkungan</h3>
-            <p>Simulasi proses kimia, energi terbarukan, pengelolaan limbah industri, AMDAL, & pemurnian air bersih.</p>
-            <span class="field-tags">#SimulasiProses #AMDAL #Energi</span>
+            <div class="iot-tech-body">
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="flask-conical"></i> Studi Kasus</h4>
+                    <ul>
+                        <li><i data-lucide="leaf"></i> Monitoring kebun & pertanian cerdas</li>
+                        <li><i data-lucide="droplets"></i> Monitoring banjir & ketinggian air</li>
+                        <li><i data-lucide="sprout"></i> Smart Agriculture end-to-end</li>
+                        <li><i data-lucide="building-2"></i> Smart city sensor network</li>
+                        <li><i data-lucide="wind"></i> Monitoring kualitas udara lingkungan</li>
+                    </ul>
+                </div>
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="book-open"></i> Materi Bimbingan</h4>
+                    <ul>
+                        <li><i data-lucide="check"></i> LoRa vs LoRaWAN (arsitektur lengkap)</li>
+                        <li><i data-lucide="check"></i> Gateway, End Device & Network Server</li>
+                        <li><i data-lucide="check"></i> Link Budget, RSSI & SNR Analysis</li>
+                        <li><i data-lucide="check"></i> Coverage Area & Spreading Factor</li>
+                        <li><i data-lucide="check"></i> MQTT Integration & Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="iot-tech-footer">
+                <div class="iot-tech-tags">
+                    <span>SX1276</span><span>RAK811</span><span>TTN</span><span>ChirpStack</span><span>MQTT</span>
+                </div>
+                <a href="#custom-form" class="btn btn-sm-accent" onclick="selectField('IoT & Embedded System')">Konsultasi LoRa</a>
+            </div>
+        </div>
+
+        <!-- NB-IoT Card -->
+        <div class="iot-tech-card iot-tech-featured">
+            <div class="iot-tech-featured-badge">⭐ Paling Banyak Dicari</div>
+            <div class="iot-tech-header iot-nbiot">
+                <div class="iot-tech-icon-wrap">
+                    <i data-lucide="signal"></i>
+                </div>
+                <div class="iot-tech-title-block">
+                    <span class="iot-tech-proto">📶 NB-IoT</span>
+                    <h3>Narrowband, Jaringan Seluler</h3>
+                </div>
+                <div class="iot-tech-range-badge">Coverage <strong>Indoor++</strong></div>
+            </div>
+            <div class="iot-tech-body">
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="flask-conical"></i> Studi Kasus</h4>
+                    <ul>
+                        <li><i data-lucide="zap"></i> Smart Metering listrik & gas</li>
+                        <li><i data-lucide="droplets"></i> Water Meter pintar IoT</li>
+                        <li><i data-lucide="factory"></i> Monitoring industri & pabrik</li>
+                        <li><i data-lucide="container"></i> Monitoring tangki & storage</li>
+                        <li><i data-lucide="cloud"></i> Environmental Monitoring jaringan luas</li>
+                    </ul>
+                </div>
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="book-open"></i> Materi Bimbingan</h4>
+                    <ul>
+                        <li><i data-lucide="check"></i> Arsitektur NB-IoT & Coverage Enhancement</li>
+                        <li><i data-lucide="check"></i> Power Saving Mode (PSM) & eDRX</li>
+                        <li><i data-lucide="check"></i> SIM Management & APN Configuration</li>
+                        <li><i data-lucide="check"></i> Data Throughput & Latency Analysis</li>
+                        <li><i data-lucide="check"></i> Integrasi Dashboard & Cloud Platform</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="iot-tech-footer">
+                <div class="iot-tech-tags">
+                    <span>SIM7020</span><span>BC660K</span><span>PSM</span><span>eDRX</span><span>CoAP</span>
+                </div>
+                <a href="#custom-form" class="btn btn-primary" onclick="selectField('IoT & Embedded System')">Konsultasi NB-IoT</a>
+            </div>
+        </div>
+
+        <!-- LTE Cat-1 Card -->
+        <div class="iot-tech-card">
+            <div class="iot-tech-header iot-ltecat1">
+                <div class="iot-tech-icon-wrap">
+                    <i data-lucide="antenna"></i>
+                </div>
+                <div class="iot-tech-title-block">
+                    <span class="iot-tech-proto">🚚 LTE Cat-1</span>
+                    <h3>Real-time, Throughput Tinggi</h3>
+                </div>
+                <div class="iot-tech-range-badge">Speed <strong>10 Mbps</strong></div>
+            </div>
+            <div class="iot-tech-body">
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="flask-conical"></i> Studi Kasus</h4>
+                    <ul>
+                        <li><i data-lucide="map-pin"></i> GPS Tracking kendaraan & aset</li>
+                        <li><i data-lucide="package"></i> Asset Tracking real-time</li>
+                        <li><i data-lucide="truck"></i> Fleet Management armada</li>
+                        <li><i data-lucide="box"></i> Container Monitoring global</li>
+                        <li><i data-lucide="route"></i> Smart Logistics & Supply Chain</li>
+                    </ul>
+                </div>
+                <div class="iot-tech-block">
+                    <h4><i data-lucide="book-open"></i> Materi Bimbingan</h4>
+                    <ul>
+                        <li><i data-lucide="check"></i> LTE Cat-1 Architecture & Band</li>
+                        <li><i data-lucide="check"></i> Throughput & Latency Testing</li>
+                        <li><i data-lucide="check"></i> Power Consumption Analysis</li>
+                        <li><i data-lucide="check"></i> MQTT Communication & Protocol</li>
+                        <li><i data-lucide="check"></i> Real-time Monitoring Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="iot-tech-footer">
+                <div class="iot-tech-tags">
+                    <span>SIM7600</span><span>EC21</span><span>GNSS</span><span>MQTT</span><span>Real-time</span>
+                </div>
+                <a href="#custom-form" class="btn btn-sm-accent" onclick="selectField('IoT & Embedded System')">Konsultasi LTE Cat-1</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom proof bar -->
+    <div class="iot-comm-proof">
+        <div class="iot-proof-item">
+            <i data-lucide="shield-check"></i>
+            <span>Berpengalaman langsung, bukan teori semata</span>
+        </div>
+        <div class="iot-proof-divider"></div>
+        <div class="iot-proof-item">
+            <i data-lucide="layers"></i>
+            <span>Dari hardware hingga cloud dashboard</span>
+        </div>
+        <div class="iot-proof-divider"></div>
+        <div class="iot-proof-item">
+            <i data-lucide="graduation-cap"></i>
+            <span>Siap untuk skripsi, TA, maupun proyek industri</span>
+        </div>
+        <div class="iot-proof-divider"></div>
+        <div class="iot-proof-item">
+            <i data-lucide="message-circle"></i>
+            <span>Konsultasi awal gratis, tanpa komitmen</span>
         </div>
     </div>
 </section>
@@ -400,14 +558,13 @@
                     <select id="fieldSelect" required>
                         <option value="" disabled selected>Pilih bidang bimbingan</option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
-                        <option value="Data Science & Statistik">Data Science & Statistik</option>
-                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
-                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
-                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                        <option value="Teknik Elektro Medik">Teknik Elektro Medik</option>
+                        <option value="IT & Teknik Informatika">IT & Teknik Informatika</option>
+                        <option value="IoT & Embedded System">IoT & Embedded System</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="packageSelect">Pilihan Paket</label>
                     <select id="packageSelect" required>

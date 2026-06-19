@@ -80,6 +80,60 @@
                             {% elif req['status'] == 'Paid' %}
                             <p class="pay-hint paid">✅ Pembayaran lunas — bimbingan segera dimulai.</p>
                             {% endif %}
+
+                            <!-- Catatan Bimbingan (Ongoing / Completed) -->
+                            {% if req['status'] in ['Ongoing', 'Completed'] %}
+                            {% set notes = notes_map.get(req['id'], []) %}
+                            <div class="session-notes">
+                                <div class="session-notes-header">
+                                    <i data-lucide="notebook-pen"></i>
+                                    <span>Catatan Bimbingan</span>
+                                    {% if notes %}<span class="notes-count">{{ notes|length }} sesi</span>{% endif %}
+                                </div>
+                                {% if notes %}
+                                <div class="notes-timeline">
+                                    {% for n in notes %}
+                                    <div class="note-entry">
+                                        <span class="note-date">{{ n['created_at'].split(' ')[0] }} {{ n['created_at'].split(' ')[1][:5] if ' ' in n['created_at'] else '' }}</span>
+                                        <p>{{ n['note'] }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                <p class="notes-empty-text">Belum ada catatan dari mentor.</p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+
+                            <!-- Review (hanya ketika Completed) -->
+                            {% if req['status'] == 'Completed' %}
+                                {% if not req['review_comment'] %}
+                                <div class="review-section" id="reviewSection-{{ req['id'] }}">
+                                    <div class="review-header">
+                                        <i data-lucide="message-circle"></i>
+                                        <span>Berikan Ulasan Bimbingan</span>
+                                    </div>
+                                    <div class="star-rating" id="stars-{{ req['id'] }}" data-rating="0">
+                                        {% for i in range(1, 6) %}
+                                        <span class="star" data-val="{{ i }}" onclick="setStar({{ req['id'] }}, {{ i }})">☆</span>
+                                        {% endfor %}
+                                    </div>
+                                    <textarea id="reviewText-{{ req['id'] }}" rows="3" placeholder="Ceritakan pengalaman bimbingan kamu — apa yang kamu pelajari, apakah masalah terselesaikan, dsb..."></textarea>
+                                    <button class="btn btn-primary" onclick="submitReview({{ req['id'] }})" style="width:100%;margin-top:0.75rem;">Kirim Ulasan</button>
+                                </div>
+                                {% else %}
+                                <div class="review-done">
+                                    <div class="review-done-header">
+                                        <i data-lucide="check-circle-2"></i>
+                                        <span>Ulasan Anda</span>
+                                        {% if req['review_rating'] %}
+                                        <span class="review-stars">{% for i in range(req['review_rating']) %}★{% endfor %}{% for i in range(5 - req['review_rating']) %}☆{% endfor %}</span>
+                                        {% endif %}
+                                    </div>
+                                    <p class="review-comment">"{{ req['review_comment'] }}"</p>
+                                </div>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     {% endfor %}
                 {% else %}
@@ -102,47 +156,52 @@
             <h3 style="font-size: 1.5rem; border-left: 4px solid var(--color-accent); padding-left: 10px;">Layanan Bimbingan Belajar</h3>
             
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                
-                <!-- Teknik Elektro & IT -->
+
                 <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
                     <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
-                        <i data-lucide="cpu" style="width:18px; height:18px"></i> Teknik Elektro & Instrumentasi
+                        <i data-lucide="cpu" style="width:18px; height:18px"></i> Teknik Elektro
                     </h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
-                        Pendampingan pemrograman mikrokontroler (Arduino, ESP32, PLC), skema sirkuit daya, sensor, dan perancangan otomatisasi sistem.
+                        Pemrograman mikrokontroler (Arduino, ESP32, PLC), skema sirkuit daya, sensor, kendali otomasi, dan telekomunikasi.
                     </p>
                 </div>
-                
-                <!-- Software & IT -->
+
                 <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
                     <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
-                        <i data-lucide="code-2" style="width:18px; height:18px"></i> IT & Rekayasa Perangkat Lunak
+                        <i data-lucide="activity" style="width:18px; height:18px"></i> Teknik Elektro Medik
                     </h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
-                        Bimbingan coding web, aplikasi mobile, struktur data, REST API, implementasi database relasional, dan review keandalan program.
+                        Instrumentasi medis, sensor biomedik, perangkat monitoring pasien (ECG, EEG), dan sistem alat kesehatan berbasis elektronik.
                     </p>
                 </div>
-                
-                <!-- Data & Statistik -->
+
                 <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
                     <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
-                        <i data-lucide="line-chart" style="width:18px; height:18px"></i> Data Science & Analisis Statistik
+                        <i data-lucide="code-2" style="width:18px; height:18px"></i> IT & Teknik Informatika
                     </h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
-                        Bantuan pengolahan data statistik menggunakan SPSS, R, Python, perumusan regresi, pengujian hipotesis, dan modeling machine learning.
+                        Coding web/mobile fullstack, REST API, struktur data, database relasional, keamanan jaringan, dan rekayasa perangkat lunak.
                     </p>
                 </div>
-                
-                <!-- Sipil, Mesin, Kimia -->
+
                 <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
                     <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
-                        <i data-lucide="settings" style="width:18px; height:18px"></i> Sipil, Mesin & Rekayasa Fisik
+                        <i data-lucide="wifi" style="width:18px; height:18px"></i> IoT & Embedded System
                     </h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
-                        Review gambar teknik AutoCAD/SketchUp, pemodelan struktur SAP2000, simulasi termal CFD, dan simulasi proses reaksi kimia.
+                        Perancangan sistem IoT, pemrograman embedded (RTOS, FreeRTOS), protokol MQTT/HTTP, dan integrasi cloud untuk sensor.
                     </p>
                 </div>
-                
+
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-sm)">
+                    <h4 style="font-size:1.05rem; display:flex; align-items:center; gap:8px; color:var(--color-primary)">
+                        <i data-lucide="bar-chart-2" style="width:18px; height:18px"></i> AI & Data Science
+                    </h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top: 6px;">
+                        Machine learning, deep learning, computer vision, NLP, analisis data menggunakan Python, TensorFlow, PyTorch, dan visualisasi data.
+                    </p>
+                </div>
+
             </div>
         </div>
 
@@ -155,11 +214,10 @@
                     <select id="dashField" required>
                         <option value="" disabled selected>Pilih bidang bimbingan</option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="IT & Sistem Informasi">IT & Sistem Informasi</option>
-                        <option value="Data Science & Statistik">Data Science & Statistik</option>
-                        <option value="Teknik Sipil & Arsitektur">Teknik Sipil & Arsitektur</option>
-                        <option value="Teknik Mesin & Industri">Teknik Mesin & Industri</option>
-                        <option value="Teknik Kimia & Lingkungan">Teknik Kimia & Lingkungan</option>
+                        <option value="Teknik Elektro Medik">Teknik Elektro Medik</option>
+                        <option value="IT & Teknik Informatika">IT & Teknik Informatika</option>
+                        <option value="IoT & Embedded System">IoT & Embedded System</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
                     </select>
                 </div>
                 
@@ -343,6 +401,63 @@
                 () => showToast('Gagal menyalin', 'error')
             );
         });
+    }
+
+    // ----- Star rating -----
+    function setStar(id, val) {
+        const container = document.getElementById('stars-' + id);
+        if (!container) return;
+        container.dataset.rating = val;
+        container.querySelectorAll('.star').forEach(s => {
+            const active = parseInt(s.dataset.val) <= val;
+            s.textContent = active ? '★' : '☆';
+            s.classList.toggle('active', active);
+        });
+    }
+
+    // Hover preview for stars
+    document.querySelectorAll('.star-rating').forEach(container => {
+        container.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('mouseenter', () => {
+                const val = parseInt(star.dataset.val);
+                container.querySelectorAll('.star').forEach(s => {
+                    s.textContent = parseInt(s.dataset.val) <= val ? '★' : '☆';
+                });
+            });
+            star.addEventListener('mouseleave', () => {
+                const current = parseInt(container.dataset.rating) || 0;
+                container.querySelectorAll('.star').forEach(s => {
+                    s.textContent = parseInt(s.dataset.val) <= current ? '★' : '☆';
+                });
+            });
+        });
+    });
+
+    // ----- Submit review -----
+    async function submitReview(id) {
+        const rating = parseInt(document.getElementById('stars-' + id).dataset.rating) || null;
+        const comment = (document.getElementById('reviewText-' + id).value || '').trim();
+        if (!comment) { showToast('Tulis komentar dulu ya!', 'error'); return; }
+        const btn = document.querySelector('#reviewSection-' + id + ' button');
+        btn.disabled = true;
+        try {
+            const res = await fetch('/api/requests/' + id + '/review', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ comment, rating })
+            });
+            const data = await res.json();
+            if (data.status === 'success') {
+                showToast(data.message, 'success');
+                setTimeout(() => location.reload(), 1300);
+            } else {
+                showToast('Gagal: ' + data.message, 'error');
+                btn.disabled = false;
+            }
+        } catch {
+            showToast('Terjadi kesalahan koneksi.', 'error');
+            btn.disabled = false;
+        }
     }
 </script>
 {% endblock %}

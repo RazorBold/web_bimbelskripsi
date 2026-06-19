@@ -210,7 +210,7 @@
     function rupiah(n) { return 'Rp' + Number(n).toLocaleString('id-ID'); }
     function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
 
-    function openDetail(id) {
+    async function openDetail(id) {
         const r = REQUESTS[id];
         if (!r) return;
         const rows = [
@@ -229,9 +229,85 @@
         let html = rows.map(([k, v]) => `<div class="detail-row"><span>${k}</span><b>${v}</b></div>`).join('');
         html += `<div class="detail-block"><span>Deskripsi</span><p>${esc(r.description)}</p></div>`;
         if (r.admin_note) html += `<div class="detail-block"><span>Catatan Admin</span><p>${esc(r.admin_note)}</p></div>`;
+
+        // Ulasan customer
+        if (r.review_comment) {
+            const stars = r.review_rating
+                ? '★'.repeat(r.review_rating) + '☆'.repeat(5 - r.review_rating)
+                : '';
+            html += `<div class="detail-block"><span>Ulasan Klien ${stars ? '· ' + stars : ''}</span><p>${esc(r.review_comment)}</p></div>`;
+        }
+
+        // Catatan bimbingan (dimuat async)
+        html += `<div class="detail-block" id="detailNotesBlock">
+            <span>Catatan Bimbingan</span>
+            <div id="notesContent"><p style="color:var(--text-muted);font-size:0.85rem;">Memuat...</p></div>
+        </div>`;
+
+        // Form tambah catatan (hanya saat Ongoing)
+        if (r.status === 'Ongoing') {
+            html += `<div class="detail-block">
+                <span>Tambah Catatan Sesi</span>
+                <div class="add-note-area">
+                    <textarea id="newNoteText" rows="2" placeholder="Tuliskan materi / progress sesi hari ini..."></textarea>
+                    <button class="btn btn-primary" onclick="addNote(${id})" style="white-space:nowrap;">Simpan</button>
+                </div>
+                <div class="alert-error-box" id="noteErr" style="margin-top:0.5rem;"></div>
+            </div>`;
+        }
+
         document.getElementById('detailBody').innerHTML = html;
         showPane('modalDetail');
         overlay.classList.add('show');
+        loadNotes(id);
+    }
+
+    async function loadNotes(id) {
+        try {
+            const res = await fetch(`/api/admin/requests/${id}/notes`);
+            const data = await res.json();
+            const notes = data.notes || [];
+            const container = document.getElementById('notesContent');
+            if (!container) return;
+            if (notes.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;">Belum ada catatan bimbingan.</p>';
+            } else {
+                let notesHtml = '<div class="admin-notes-list">';
+                notes.forEach((n, i) => {
+                    notesHtml += `<div class="admin-note-item">
+                        <div class="admin-note-meta">
+                            <span class="admin-note-num">Sesi ${i + 1}</span>
+                            <span class="admin-note-date">${esc(n.created_at.split(' ')[0])}</span>
+                        </div>
+                        <p>${esc(n.note)}</p>
+                    </div>`;
+                });
+                notesHtml += '</div>';
+                container.innerHTML = notesHtml;
+            }
+        } catch {
+            const container = document.getElementById('notesContent');
+            if (container) container.innerHTML = '<p style="color:#dc2626;font-size:0.85rem;">Gagal memuat catatan.</p>';
+        }
+    }
+
+    async function addNote(id) {
+        const textarea = document.getElementById('newNoteText');
+        const errEl = document.getElementById('noteErr');
+        const note = (textarea.value || '').trim();
+        errEl.classList.remove('show');
+        if (!note) { errEl.textContent = 'Catatan tidak boleh kosong.'; errEl.classList.add('show'); return; }
+        const btn = document.querySelector('.add-note-area button');
+        btn.disabled = true;
+        const data = await apiPost(`/api/admin/requests/${id}/notes`, { note });
+        if (data.status === 'success') {
+            textarea.value = '';
+            loadNotes(id);
+        } else {
+            errEl.textContent = data.message;
+            errEl.classList.add('show');
+        }
+        btn.disabled = false;
     }
 
     // Tabs
