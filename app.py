@@ -184,6 +184,21 @@ def portfolio():
     return render_template("portfolio.html", user=current_user())
 
 
+@app.route("/cara-kerja")
+def cara_kerja():
+    return render_template("cara_kerja.html", user=current_user())
+
+
+@app.route("/kelas")
+def kelas():
+    return render_template("kelas.html", user=current_user())
+
+
+@app.route("/testimoni")
+def testimoni():
+    return render_template("testimoni.html", user=current_user())
+
+
 @app.route("/dashboard")
 @login_required
 def dashboard():

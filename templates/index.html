@@ -105,61 +105,6 @@
     </div>
 </section>
 
-<!-- Pilihan Bidang Bimbingan Section -->
-<section class="fields-section" id="bidang">
-    <div class="section-header">
-        <h2>Pilihan Bidang Bimbingan</h2>
-        <p>Fokus pada bidang IT, Elektro, IoT, dan AI yang siap membantu skripsi kamu</p>
-    </div>
-    
-    <div class="fields-grid">
-        <div class="field-card glass" onclick="selectField('Teknik Elektro')">
-            <div class="field-icon">
-                <i data-lucide="cpu"></i>
-            </div>
-            <h3>Teknik Elektro</h3>
-            <p>Mikrokontroler (Arduino, ESP32), PLC, sistem kendali otomasi, sirkuit daya, telekomunikasi, dan instalasi listrik.</p>
-            <span class="field-tags">#Arduino #PLC #Kontrol</span>
-        </div>
-
-        <div class="field-card glass" onclick="selectField('Teknik Elektro Medik')">
-            <div class="field-icon">
-                <i data-lucide="activity"></i>
-            </div>
-            <h3>Teknik Elektro Medik</h3>
-            <p>Instrumentasi medis, sensor biomedik, perangkat monitoring pasien, ECG, EEG, dan sistem alat kesehatan berbasis elektronik.</p>
-            <span class="field-tags">#Biomedik #ECG #Sensor</span>
-        </div>
-
-        <div class="field-card glass" onclick="selectField('IT & Teknik Informatika')">
-            <div class="field-icon">
-                <i data-lucide="code-2"></i>
-            </div>
-            <h3>IT & Teknik Informatika</h3>
-            <p>Aplikasi web/mobile fullstack, basis data relasional, keamanan jaringan, REST API, dan rekayasa perangkat lunak.</p>
-            <span class="field-tags">#WebDev #Database #Software</span>
-        </div>
-
-        <div class="field-card glass" onclick="selectField('IoT & Embedded System')">
-            <div class="field-icon">
-                <i data-lucide="wifi"></i>
-            </div>
-            <h3>IoT & Embedded System</h3>
-            <p>Perancangan sistem IoT, pemrograman embedded (RTOS, FreeRTOS), komunikasi MQTT/HTTP, dan integrasi cloud sensor.</p>
-            <span class="field-tags">#IoT #ESP32 #MQTT</span>
-        </div>
-
-        <div class="field-card glass" onclick="selectField('AI & Data Science')">
-            <div class="field-icon">
-                <i data-lucide="bar-chart-2"></i>
-            </div>
-            <h3>AI & Data Science</h3>
-            <p>Machine learning, deep learning, computer vision, NLP, analisis data (Python, TensorFlow, PyTorch), dan visualisasi data.</p>
-            <span class="field-tags">#MachineLearning #Python #AI</span>
-        </div>
-    </div>
-</section>
-
 <!-- IoT Long Range Communications Section -->
 <section class="iot-comm-section" id="iot-comm">
     <div class="iot-comm-header">
@@ -213,7 +158,7 @@
                 <div class="iot-tech-tags">
                     <span>SX1276</span><span>RAK811</span><span>TTN</span><span>ChirpStack</span><span>MQTT</span>
                 </div>
-                <a href="#custom-form" class="btn btn-sm-accent" onclick="selectField('IoT & Embedded System')">Konsultasi LoRa</a>
+                <a href="{{ url_for('kelas') }}#booking-form" class="btn btn-sm-accent">Konsultasi LoRa</a>
             </div>
         </div>
 
@@ -256,7 +201,7 @@
                 <div class="iot-tech-tags">
                     <span>SIM7020</span><span>BC660K</span><span>PSM</span><span>eDRX</span><span>CoAP</span>
                 </div>
-                <a href="#custom-form" class="btn btn-primary" onclick="selectField('IoT & Embedded System')">Konsultasi NB-IoT</a>
+                <a href="{{ url_for('kelas') }}#booking-form" class="btn btn-primary">Konsultasi NB-IoT</a>
             </div>
         </div>
 
@@ -298,7 +243,7 @@
                 <div class="iot-tech-tags">
                     <span>SIM7600</span><span>EC21</span><span>GNSS</span><span>MQTT</span><span>Real-time</span>
                 </div>
-                <a href="#custom-form" class="btn btn-sm-accent" onclick="selectField('IoT & Embedded System')">Konsultasi LTE Cat-1</a>
+                <a href="{{ url_for('kelas') }}#booking-form" class="btn btn-sm-accent">Konsultasi LTE Cat-1</a>
             </div>
         </div>
 
@@ -366,277 +311,77 @@
     </div>
 </section>
 
-<!-- Cara Kerja Section -->
-<section class="how-it-works" id="cara-kerja">
-    <div class="section-header">
-        <h2>Bagaimana Cara Kerjanya?</h2>
-        <p>Alur bimbingan yang terstruktur dari konsultasi awal hingga siap menghadapi dosen penguji</p>
-    </div>
-    
-    <div class="roadmap-container">
-        <div class="roadmap-card glass">
-            <div class="roadmap-num">1</div>
-            <h3>Pilih Bidang</h3>
-            <p>Pilih topik bimbingan skripsi atau ajukan topik custom.</p>
-        </div>
-        <div class="roadmap-card glass">
-            <div class="roadmap-num">2</div>
-            <h3>Diskusi Awal</h3>
-            <p>Konsultasi dengan mentor tentang kendala penulisan & analisis.</p>
-        </div>
-        <div class="roadmap-card glass">
-            <div class="roadmap-num">3</div>
-            <h3>Pilih Jadwal</h3>
-            <p>Tentukan waktu bimbingan yang cocok dengan jadwal kuliah Anda.</p>
-        </div>
-        <div class="roadmap-card glass">
-            <div class="roadmap-num">4</div>
-            <h3>Sesi Bimbingan</h3>
-            <p>Bimbingan interaktif online satu-lawan-satu membahas detail revisi.</p>
-        </div>
-        <div class="roadmap-card glass">
-            <div class="roadmap-num">5</div>
-            <h3>Siap Sidang</h3>
-            <p>Penguasaan materi 100% sehingga Anda percaya diri saat presentasi.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Paket & Harga Section -->
-<section class="pricing-section" id="harga">
-    <div class="section-header">
-        <h2>Paket Bimbingan Belajar</h2>
-        <p>Pilih paket sesuai dengan target pencapaian skripsi Anda</p>
-    </div>
-    
-    <div class="pricing-grid">
-        <!-- Basic -->
-        <div class="pricing-card glass">
-            <div class="pricing-header">
-                <h3>Basic</h3>
-                <p>Bimbingan Ringkas</p>
-                <div class="price-box">
-                    <span class="price-val">Rp149.000</span>
-                    <span class="price-period">/ sesi</span>
-                </div>
-            </div>
-            <hr class="mobile-divider">
-            <ul class="pricing-features">
-                <li><i data-lucide="check"></i> Durasi 60 menit/sesi</li>
-                <li><i data-lucide="check"></i> Sesi tatap muka online via Meet</li>
-                <li><i data-lucide="check"></i> Review core masalah & solusi</li>
-                <li><i data-lucide="check"></i> Rekaman video sesi belajar</li>
-                <li><i data-lucide="x" style="color: var(--text-muted)"></i> Konsultasi harian via WhatsApp</li>
-            </ul>
-            <a href="#custom-form" class="btn btn-secondary" onclick="selectPricing('Basic')">Pilih Paket</a>
-        </div>
-        
-        <!-- Pro -->
-        <div class="pricing-card glass premium-highlight">
-            <span class="badge-popular">Paling Populer</span>
-            <div class="pricing-header">
-                <h3>Pro</h3>
-                <p>Bimbingan Intensif</p>
-                <div class="price-box">
-                    <span class="price-val">Rp249.000</span>
-                    <span class="price-period">/ sesi</span>
-                </div>
-            </div>
-            <hr class="mobile-divider">
-            <ul class="pricing-features">
-                <li><i data-lucide="check"></i> Durasi 90 menit/sesi</li>
-                <li><i data-lucide="check"></i> Sesi tatap muka online via Meet</li>
-                <li><i data-lucide="check"></i> Review coding / rumus / model lengkap</li>
-                <li><i data-lucide="check"></i> File materi & rekaman sesi</li>
-                <li><i data-lucide="check"></i> Prioritas penjadwalan bimbingan</li>
-            </ul>
-            <a href="#custom-form" class="btn btn-primary" onclick="selectPricing('Pro')">Pilih Paket</a>
-        </div>
-        
-        <!-- Premium -->
-        <div class="pricing-card glass">
-            <div class="pricing-header">
-                <h3>Premium</h3>
-                <p>Bimbingan Lengkap</p>
-                <div class="price-box">
-                    <span class="price-val">Rp349.000</span>
-                    <span class="price-period">/ sesi</span>
-                </div>
-            </div>
-            <hr class="mobile-divider">
-            <ul class="pricing-features">
-                <li><i data-lucide="check"></i> Durasi 120 menit/sesi</li>
-                <li><i data-lucide="check"></i> Pendampingan coding & data end-to-end</li>
-                <li><i data-lucide="check"></i> Pengecekan draf Bab 1 s.d Bab 5</li>
-                <li><i data-lucide="check"></i> Contoh kode, file simulasi, & materi</li>
-                <li><i data-lucide="check"></i> Konsultasi chat WhatsApp harian</li>
-            </ul>
-            <a href="#custom-form" class="btn btn-secondary" onclick="selectPricing('Premium')">Pilih Paket</a>
-        </div>
-    </div>
-
-    <!-- Custom End-to-End Package -->
-    <div class="custom-package-banner">
-        <div class="custom-package-info">
-            <span class="custom-package-tag">Proyek End-to-End</span>
-            <h3>Paket Custom</h3>
-            <p>Butuh proyek dikerjakan dari nol sampai jadi? Ceritakan kamu mau apa dan sampai sejauh mana, lalu kita diskusikan ruang lingkupnya bersama.</p>
-            <ul class="custom-package-features">
-                <li><i data-lucide="check-circle-2"></i> Dikerjakan menyeluruh hingga selesai (siap pakai)</li>
-                <li><i data-lucide="check-circle-2"></i> Scope fleksibel: tentukan tujuan akhir & batasan proyek</li>
-                <li><i data-lucide="check-circle-2"></i> Pendampingan, dokumentasi, & penjelasan lengkap</li>
-                <li><i data-lucide="check-circle-2"></i> Harga menyesuaikan kompleksitas — deal bersama (nego)</li>
-            </ul>
-        </div>
-        <div class="custom-package-action">
-            <span class="custom-package-price">Harga</span>
-            <span class="custom-package-nego">Nego</span>
-            <span class="custom-package-note">sesuai kebutuhan proyek</span>
-            <a href="#custom-form" class="btn btn-accent" onclick="selectPricing('Custom')">Diskusikan Proyek</a>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonial Section -->
+<!-- Testimoni Preview Section -->
 <section class="testimonial-section" id="testimonial">
     <div class="section-header">
         <h2>Kisah Sukses Mahasiswa</h2>
-        <p>Testimoni dari rekan mahasiswa yang telah lulus sidang skripsi dengan nilai memuaskan</p>
+        <p>Ratusan mahasiswa sudah membuktikan bimbingan kami dari berbagai universitas</p>
     </div>
-    
+
     <div class="testimonial-container">
         <div class="testimonial-card glass">
-            <p class="test-quote">"Pemberian materi dari mentor sangat sistematis. Skripsi PLC dan otomasi industri saya akhirnya selesai dengan pemahaman coding yang matang."</p>
+            <p class="test-quote">"Skripsi PLC dan otomasi industri saya akhirnya selesai dengan pemahaman coding yang matang. Mentor sangat sabar menjelaskan dari dasar hingga sidang nilai A."</p>
             <div class="test-user">
                 <div class="user-avatar">RP</div>
                 <div class="user-info">
                     <h4>Rizky Pratama</h4>
-                    <p>Teknik Elektro - UNDIP</p>
+                    <p>Teknik Elektro — UNDIP</p>
                 </div>
             </div>
         </div>
         <div class="testimonial-card glass">
-            <p class="test-quote">"Sangat terbantu untuk pengujian statistik dan hipotesis skripsi saya. Penjelasannya terstruktur dan mudah diterangkan di depan dosen penguji."</p>
+            <p class="testi-stars" style="margin-bottom:0.5rem; letter-spacing:2px;">★★★★★</p>
+            <p class="test-quote">"LoRaWAN saya untuk monitoring udara benar-benar dikupas tuntas — dari gateway setup hingga MQTT. Tidak ada mentor lain yang bisa menjelaskan sedetail ini."</p>
             <div class="test-user">
-                <div class="user-avatar">DL</div>
+                <div class="user-avatar">AF</div>
                 <div class="user-info">
-                    <h4>Dewi Lestari</h4>
-                    <p>Teknik Industri - UGM</p>
+                    <h4>Ahmad Fauzi</h4>
+                    <p>Teknik Elektro — Universitas Brawijaya</p>
                 </div>
             </div>
         </div>
         <div class="testimonial-card glass">
-            <p class="test-quote">"Simulink MATLAB untuk kontrol struktur jembatan penyeberangan saya akhirnya bekerja. Mentor sangat responsif membimbing revisi."</p>
+            <p class="test-quote">"CNN saya untuk deteksi penyakit tanaman akhirnya tembus akurasi 94% setelah bimbingan. Teknik transfer learning dan augmentasi data dijelaskan sangat jelas."</p>
             <div class="test-user">
-                <div class="user-avatar">HR</div>
+                <div class="user-avatar">MP</div>
                 <div class="user-info">
-                    <h4>H. Fatur Rahman</h4>
-                    <p>Teknik Sipil - ITS</p>
+                    <h4>M. Prasetyo</h4>
+                    <p>Teknik Informatika — IPB</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <div style="text-align:center; margin-top: 2rem;">
+        <a href="{{ url_for('testimoni') }}" class="btn btn-outline">Lihat Semua Testimoni →</a>
+    </div>
 </section>
 
-<!-- Custom Booking Form Section -->
-<section class="custom-class-section" id="custom-form">
-    <div class="custom-form-container glass">
-        <div class="form-info-side">
-            <h3>Formulir Pengajuan Kelas</h3>
-            <p>Ajukan konsultasi awal bimbingan skripsi dengan mengisi detail permasalahan yang sedang Anda hadapi di bawah ini.</p>
-            <ul class="form-bullets-list">
-                <li><i data-lucide="check-circle-2"></i> Jadwal belajar privat & personal</li>
-                <li><i data-lucide="check-circle-2"></i> Konsultasi judul & rancangan bab</li>
-                <li><i data-lucide="check-circle-2"></i> Pembahasan simulasi, coding, & data</li>
-            </ul>
+<!-- CTA Section -->
+<section style="padding: 2rem 2rem 4rem;">
+    <div class="pf-cta-inline glass" style="max-width: 800px; margin: 0 auto;">
+        <div class="pf-cta-inline-text">
+            <h3>Siap Mulai Bimbingan Skripsi?</h3>
+            <p>Pilih bidang dan paket yang sesuai, atau diskusikan proyek kamu langsung bersama mentor kami.</p>
         </div>
-        
-        <div class="form-action-side">
-            <form id="bookingForm">
-                <div class="form-group">
-                    <label for="fieldSelect">Bidang Bimbingan</label>
-                    <select id="fieldSelect" required>
-                        <option value="" disabled selected>Pilih bidang bimbingan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Elektro Medik">Teknik Elektro Medik</option>
-                        <option value="IT & Teknik Informatika">IT & Teknik Informatika</option>
-                        <option value="IoT & Embedded System">IoT & Embedded System</option>
-                        <option value="AI & Data Science">AI & Data Science</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="packageSelect">Pilihan Paket</label>
-                    <select id="packageSelect" required>
-                        <option value="" disabled selected>Pilih paket bimbingan</option>
-                        <option value="Basic">Basic (Rp149.000 / sesi)</option>
-                        <option value="Pro">Pro (Rp249.000 / sesi)</option>
-                        <option value="Premium">Premium (Rp349.000 / sesi)</option>
-                        <option value="Custom">Custom — Proyek End-to-End (Harga Nego)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="descriptionInput">Deskripsi Kendala Skripsi</label>
-                    <textarea id="descriptionInput" rows="4" placeholder="Tuliskan kendala skripsi Anda (misal: bingung pengujian data, error coding program, atau kesulitan menulis bab pembahasan)..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="preferredDate">Tanggal yang Diinginkan <span style="color:var(--text-muted);font-weight:400;">(opsional)</span></label>
-                    <input type="date" id="preferredDate">
-                </div>
-
-                {% if session.get('user_id') %}
-                    <button type="submit" class="btn btn-primary">Ajukan Sekarang</button>
-                {% else %}
-                    <div style="display:flex; flex-direction:column; gap:10px;">
-                        <a href="{{ url_for('login') }}" class="btn btn-primary">Login untuk Mengajukan</a>
-                        <p style="font-size:0.75rem; text-align:center; color:var(--text-muted)">*Anda harus masuk akun untuk mencatat history pengajuan bimbingan.</p>
-                    </div>
-                {% endif %}
-            </form>
+        <div class="pf-cta-inline-actions">
+            <a href="{{ url_for('kelas') }}" class="btn btn-primary">Lihat Kelas & Paket</a>
+            <a href="{{ url_for('cara_kerja') }}" class="btn btn-outline">Cara Kerja</a>
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
-<!-- GSAP Page Animations & AJAX submission helper -->
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
 <script>
     function quickBook() {
-        const selectEl = document.getElementById('quickFieldSelect');
-        const fieldVal = selectEl.value;
+        const fieldVal = document.getElementById('quickFieldSelect').value;
         if (!fieldVal) {
             alert('Silakan pilih bidang bimbingan terlebih dahulu.');
             return;
         }
-        
-        // Scroll to custom-form and select the values
-        document.getElementById('fieldSelect').value = fieldVal;
-        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
+        window.location.href = "{{ url_for('kelas') }}#booking-form";
     }
-
-    function selectField(fieldName) {
-        document.getElementById('fieldSelect').value = fieldName;
-        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function selectPricing(packageName) {
-        document.getElementById('packageSelect').value = packageName;
-        updateDescHint(packageName);
-        document.getElementById('custom-form').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Guide the user to describe full project scope when Custom is chosen
-    const DEFAULT_DESC_HINT = 'Tuliskan kendala skripsi Anda (misal: bingung pengujian data, error coding program, atau kesulitan menulis bab pembahasan)...';
-    const CUSTOM_DESC_HINT = 'Jelaskan proyek yang kamu inginkan: tujuan akhir, fitur/ruang lingkup, dan sampai sejauh mana pengerjaannya. Tim kami akan menghubungi untuk diskusi & penawaran harga.';
-    function updateDescHint(packageName) {
-        const desc = document.getElementById('descriptionInput');
-        if (desc) desc.placeholder = packageName === 'Custom' ? CUSTOM_DESC_HINT : DEFAULT_DESC_HINT;
-    }
-    const pkgSelect = document.getElementById('packageSelect');
-    if (pkgSelect) pkgSelect.addEventListener('change', () => updateDescHint(pkgSelect.value));
 </script>
 {% endblock %}

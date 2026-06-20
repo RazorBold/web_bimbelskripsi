@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}Testimoni Mahasiswa | SkripsiEngineer{% endblock %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="pf-hero">
+    <div class="pf-hero-inner">
+        <span class="pf-hero-tag">KISAH NYATA</span>
+        <h1 class="pf-hero-title">Testimoni <span class="gradient-text">Mahasiswa</span></h1>
+        <p class="pf-hero-desc">Ratusan mahasiswa dari berbagai universitas telah membuktikan bimbingan kami. Ini adalah cerita nyata mereka — dari buntu sampai lulus sidang dengan nilai terbaik.</p>
+        <div class="pf-hero-stats">
+            <div class="pf-stat">
+                <span class="pf-stat-num">500+</span>
+                <span class="pf-stat-lbl">Mahasiswa Terbantu</span>
+            </div>
+            <div class="pf-stat-divider"></div>
+            <div class="pf-stat">
+                <span class="pf-stat-num">4.9/5</span>
+                <span class="pf-stat-lbl">Rating Kepuasan</span>
+            </div>
+            <div class="pf-stat-divider"></div>
+            <div class="pf-stat">
+                <span class="pf-stat-num">98%</span>
+                <span class="pf-stat-lbl">Lulus Sidang</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Bar -->
+<section class="pf-filter-section">
+    <div class="pf-filter-bar">
+        <button class="pf-filter-btn active" data-filter="all">Semua</button>
+        <button class="pf-filter-btn" data-filter="elektro">Teknik Elektro</button>
+        <button class="pf-filter-btn" data-filter="it">IT & Informatika</button>
+        <button class="pf-filter-btn" data-filter="iot">IoT & Embedded</button>
+        <button class="pf-filter-btn" data-filter="ai">AI & Data Science</button>
+        <button class="pf-filter-btn" data-filter="medik">Elektro Medik</button>
+    </div>
+</section>
+
+<!-- Testimonial Grid -->
+<section class="pf-grid-section">
+<div class="testi-grid">
+
+    <!-- 1 -->
+    <div class="testi-card glass" data-cat="elektro">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Skripsi saya tentang sistem kendali PLC untuk konveyor industri sempat mandek 3 bulan. Setelah bimbingan intensif, dalam 5 sesi saya langsung paham alur ladder diagram dan berhasil sidang dengan nilai A. Mentor sangat sabar menjelaskan ulang dari dasar."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-blue">RP</div>
+            <div class="testi-info">
+                <h4>Rizky Pratama</h4>
+                <p>Teknik Elektro — Universitas Diponegoro</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="testi-card glass" data-cat="ai">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Pengujian hipotesis statistik skripsi saya selalu error di SPSS dan saya tidak mengerti interpretasinya. Mentor menjelaskan uji normalitas, homogenitas, dan regresi berganda dengan sangat terstruktur. Dosen penguji pun terkesan dengan penjelasan saya."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-purple">DL</div>
+            <div class="testi-info">
+                <h4>Dewi Lestari</h4>
+                <p>Teknik Industri — Universitas Gadjah Mada</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="testi-card glass" data-cat="elektro">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Simulink MATLAB untuk model kontrol getaran struktur jembatan saya akhirnya berjalan. Awalnya saya pikir mustahil selesai sebelum deadline, tapi mentor membimbing step by step sampai sistem berjalan sempurna. Sidang lancar!"</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-orange">HF</div>
+            <div class="testi-info">
+                <h4>H. Fatur Rahman</h4>
+                <p>Teknik Sipil — Institut Teknologi Sepuluh Nopember</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="testi-card glass" data-cat="iot">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Proyek LoRaWAN saya untuk monitoring kualitas udara di area kampus benar-benar dikupas tuntas — mulai dari spreading factor, gateway setup ChirpStack, hingga integrasi MQTT ke dashboard. Tidak ada mentor lain yang bisa menjelaskan ini sedetail ini."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-teal">AF</div>
+            <div class="testi-info">
+                <h4>Ahmad Fauzi</h4>
+                <p>Teknik Elektro — Universitas Brawijaya</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="testi-card glass" data-cat="it">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Saya mengerjakan sistem informasi manajemen berbasis web untuk RS, dan stuck di bagian REST API dan autentikasi JWT. Dalam 3 sesi sudah clear semua. Kode juga dirapikan supaya bisa dijelaskan ke dosen dengan baik. Sangat worth it!"</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-indigo">SR</div>
+            <div class="testi-info">
+                <h4>Siti Rahayu</h4>
+                <p>Teknik Informatika — Universitas Brawijaya</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="testi-card glass" data-cat="ai">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Deteksi penyakit tanaman menggunakan CNN saya error terus saat training — akurasi tidak pernah naik di atas 60%. Setelah bimbingan, saya paham konsep augmentasi data, transfer learning dengan MobileNet, dan cara fine-tuning. Akhirnya akurasi 94%!"</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-green">MP</div>
+            <div class="testi-info">
+                <h4>M. Prasetyo</h4>
+                <p>Teknik Informatika — Institut Pertanian Bogor</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="testi-card glass" data-cat="medik">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Alat monitoring ECG berbasis ESP32 saya tidak bisa filter noise sinyal. Mentor menjelaskan filter Butterworth, notch filter 50Hz, dan cara implementasinya di firmware. Setelah itu sinyal bersih dan dosen saya sangat puas dengan hasilnya."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-red">NA</div>
+            <div class="testi-info">
+                <h4>Nur Aini</h4>
+                <p>Teknik Elektro Medik — Poltekkes Kemenkes Surabaya</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="testi-card glass" data-cat="iot">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"NB-IoT untuk smart water meter proyek saya terasa sangat kompleks — APN, PSM, CoAP semua asing. Tapi mentor menjelaskannya dengan analogi yang mudah dipahami. Dalam 4 sesi device sudah bisa kirim data ke server cloud dengan konsumsi daya sangat rendah."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-blue">BW</div>
+            <div class="testi-info">
+                <h4>Bagus Wicaksono</h4>
+                <p>Teknik Telekomunikasi — Institut Teknologi Bandung</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="testi-card glass" data-cat="it">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Skripsi saya aplikasi mobile Flutter untuk tracking pengiriman barang. Database PostgreSQL dan backend Node.js saya sering crash dan tidak scalable. Mentor bantu refactor query dan logic API. Sekarang performa meningkat drastis dan dosen sangat terkesan."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-purple">RN</div>
+            <div class="testi-info">
+                <h4>Reza Nugraha</h4>
+                <p>Sistem Informasi — Universitas Airlangga</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="testi-card glass" data-cat="elektro">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Desain inverter 3-fase untuk skripsi saya di bidang konversi energi terbarukan sangat membingungkan. Mentor membantu dari teori dasar PWM sampai simulasi PSIM. Saya akhirnya bisa menjelaskan rangkaian dengan percaya diri di depan penguji."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-orange">YS</div>
+            <div class="testi-info">
+                <h4>Yoga Santoso</h4>
+                <p>Teknik Elektro — Universitas Sebelas Maret</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="testi-card glass" data-cat="ai">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"LSTM saya untuk prediksi harga saham selalu overfitting dan saya tidak tahu cara mengatasinya. Mentor menjelaskan dropout, regularisasi, dan teknik cross-validation time series. Sekarang model jauh lebih robust dan hasil presentasi mendapat pujian dari dosen."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-indigo">FH</div>
+            <div class="testi-info">
+                <h4>Farhan Hidayat</h4>
+                <p>Matematika — Universitas Indonesia</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="testi-card glass" data-cat="medik">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Alat deteksi kadar glukosa non-invasif berbasis NIR sensor saya kesulitan di bagian kalibrasi dan regresi PLS. Mentor memandu proses kalibrasi dan interpretasi hasil secara detail. Alat berhasil divalidasi dan sidang berjalan sangat lancar."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-teal">IP</div>
+            <div class="testi-info">
+                <h4>Indah Permata</h4>
+                <p>Teknik Elektro Medik — Universitas Muhammadiyah Yogyakarta</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="testi-card glass" data-cat="iot">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Smart greenhouse dengan FreeRTOS di ESP32 saya error terus karena task scheduling yang salah. Mentor menjelaskan konsep semaphore, mutex, dan queue antar task dengan sangat jelas. Setelah itu sistem berjalan stabil 24 jam tanpa crash."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-green">DS</div>
+            <div class="testi-info">
+                <h4>Dimas Saputra</h4>
+                <p>Teknik Komputer — Universitas Padjadjaran</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="testi-card glass" data-cat="it">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Skripsi saya sistem rekomendasi film menggunakan collaborative filtering. Saya stuck di implementasi matrix factorization di Python. Mentor menjelaskan dari matematikanya sampai kodenya. Sistem berhasil dibangun dan diuji dengan dataset MovieLens."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-red">AM</div>
+            <div class="testi-info">
+                <h4>Aulia Maharani</h4>
+                <p>Ilmu Komputer — Universitas Bina Nusantara</p>
+                <span class="testi-badge">Paket Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="testi-card glass" data-cat="elektro">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Tugas akhir saya tentang desain antena microstrip untuk komunikasi 5G sub-6GHz sangat rumit. Mentor membantu simulasi di CST Studio dan interpretasi hasil S11, bandwidth, serta gain. Pertama kali saya benar-benar paham apa yang saya kerjakan sendiri."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-blue">MR</div>
+            <div class="testi-info">
+                <h4>M. Rizaldi</h4>
+                <p>Teknik Elektro — Universitas Hasanuddin</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="testi-card glass" data-cat="ai">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Saya mengerjakan deteksi masker wajah real-time dengan YOLOv8 tapi mau deploy ke Raspberry Pi selalu OOM error. Mentor menjelaskan teknik quantization dan model pruning. Akhirnya inference bisa jalan 15 FPS di edge device. Dosen pembimbing sangat bangga."</p>
+        <div class="testi-footer">
+            <div class="testi-avatar testi-av-purple">TA</div>
+            <div class="testi-info">
+                <h4>Taufik Adi</h4>
+                <p>Teknik Informatika — Universitas Telkom</p>
+                <span class="testi-badge">Paket Premium</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CTA -->
+<div class="pf-cta-inline glass" style="max-width: 760px; margin: 2rem auto 3rem;">
+    <div class="pf-cta-inline-text">
+        <h3>Ingin Jadi Kisah Sukses Berikutnya?</h3>
+        <p>Bergabung bersama ratusan mahasiswa yang sudah berhasil lulus sidang bersama kami.</p>
+    </div>
+    <div class="pf-cta-inline-actions">
+        <a href="{{ url_for('kelas') }}" class="btn btn-primary">Lihat Kelas & Paket</a>
+        <a href="{{ url_for('cara_kerja') }}" class="btn btn-outline">Cara Kerja</a>
+    </div>
+</div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const filterBtns = document.querySelectorAll('.pf-filter-btn');
+    const cards = document.querySelectorAll('.testi-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.cat === filter;
+                card.style.display = match ? '' : 'none';
+                if (match) card.style.animation = 'pf-fadeInUp 0.35s ease both';
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -34,12 +34,11 @@
             </a>
             
             <nav class="nav-links">
-                <a href="{{ url_for('index') }}#hero">Beranda</a>
-                <a href="{{ url_for('index') }}#bidang">Kelas</a>
+                <a href="{{ url_for('index') }}">Beranda</a>
+                <a href="{{ url_for('kelas') }}" {% if request.endpoint == 'kelas' %}class="nav-active"{% endif %}>Kelas</a>
                 <a href="{{ url_for('portfolio') }}" {% if request.endpoint == 'portfolio' %}class="nav-active"{% endif %}>Portfolio</a>
-                <a href="{{ url_for('index') }}#cara-kerja">Cara Kerja</a>
-                <a href="{{ url_for('index') }}#testimonial">Testimoni</a>
-                <a href="{{ url_for('index') }}#harga">Harga</a>
+                <a href="{{ url_for('cara_kerja') }}" {% if request.endpoint == 'cara_kerja' %}class="nav-active"{% endif %}>Cara Kerja</a>
+                <a href="{{ url_for('testimoni') }}" {% if request.endpoint == 'testimoni' %}class="nav-active"{% endif %}>Testimoni</a>
             </nav>
             
             <div class="nav-actions">
@@ -59,12 +58,11 @@
         
         <!-- Mobile Dropdown Nav -->
         <div class="mobile-nav" id="mobileNav">
-            <a href="{{ url_for('index') }}#hero">Beranda</a>
-            <a href="{{ url_for('index') }}#bidang">Kelas</a>
+            <a href="{{ url_for('index') }}">Beranda</a>
+            <a href="{{ url_for('kelas') }}">Kelas</a>
             <a href="{{ url_for('portfolio') }}">Portfolio</a>
-            <a href="{{ url_for('index') }}#cara-kerja">Cara Kerja</a>
-            <a href="{{ url_for('index') }}#testimonial">Testimoni</a>
-            <a href="{{ url_for('index') }}#harga">Harga</a>
+            <a href="{{ url_for('cara_kerja') }}">Cara Kerja</a>
+            <a href="{{ url_for('testimoni') }}">Testimoni</a>
             <hr class="mobile-divider">
             {% if session.get('user_id') %}
                 <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Dashboard</a>
@@ -124,11 +122,11 @@
             <div class="footer-links-group">
                 <h4>Navigasi</h4>
                 <ul>
-                    <li><a href="{{ url_for('index') }}#hero">Beranda</a></li>
-                    <li><a href="{{ url_for('index') }}#bidang">Kelas</a></li>
+                    <li><a href="{{ url_for('index') }}">Beranda</a></li>
+                    <li><a href="{{ url_for('kelas') }}">Kelas</a></li>
                     <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
-                    <li><a href="{{ url_for('index') }}#cara-kerja">Cara Kerja</a></li>
-                    <li><a href="{{ url_for('index') }}#harga">Harga</a></li>
+                    <li><a href="{{ url_for('cara_kerja') }}">Cara Kerja</a></li>
+                    <li><a href="{{ url_for('testimoni') }}">Testimoni</a></li>
                 </ul>
             </div>
 
